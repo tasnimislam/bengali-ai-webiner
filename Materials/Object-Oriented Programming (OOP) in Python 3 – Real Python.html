@@ -1,0 +1,3352 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://realpython.com/python3-object-oriented-programming/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/client.js"></script><script type="text/javascript" async="" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/prebid.js"></script>
+<link href="https://files.realpython.com/" rel="dns-prefetch">
+<link href="https://fonts.googleapis.com/" rel="dns-prefetch">
+<link href="https://fonts.gstatic.com/" rel="dns-prefetch">
+<title>Object-Oriented Programming (OOP) in Python 3 – Real Python</title>
+<meta name="author" content="Real Python">
+<meta name="description" content="In this article you’ll learn the fundamentals of object-oriented programming (OOP) in Python and how to work with classes, objects, and constructors. The tutorial also comes with several OOP exercises to review your learning progress.">
+<meta name="keywords" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="https://realpython.com/python3-object-oriented-programming/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://files.realpython.com/media/Object-Oriented-Programming-OOP-in-Python-3_Watermarked.0d29780806d5.jpg">
+<meta property="og:image" content="https://files.realpython.com/media/Object-Oriented-Programming-OOP-in-Python-3_Watermarked.0d29780806d5.jpg">
+<meta name="twitter:creator" content="@realpython">
+<meta name="twitter:site" content="@realpython">
+<meta property="og:title" content="Object-Oriented Programming (OOP) in Python 3 – Real Python">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://realpython.com/python3-object-oriented-programming/">
+<meta property="og:description" content="In this article you’ll learn the fundamentals of object-oriented programming (OOP) in Python and how to work with classes, objects, and constructors. The tutorial also comes with several OOP exercises to review your learning progress.">
+<link href="https://realpython.com/static/favicon.68cbf4197b0c.png" rel="icon">
+<link href="https://realpython.com/atom.xml" rel="alternate" title="Real Python" type="application/atom+xml">
+<link rel="manifest" href="https://realpython.com/manifest.json">
+<link rel="stylesheet" href="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/realpython.min.8505bbbe1a3e.css">
+<script async="" type="text/javascript" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/gpt.js"></script><script async="" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/fbevents.js"></script><script type="text/javascript" async="" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/6214500.js"></script><script type="text/javascript" async="" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/ecommerce.js"></script><script async="" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/analytics.js"></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35184939-1', 'auto', {'allowLinker': true});
+  ga('require', 'linker');
+  ga('linker:autoLink', ['fastspring.com', 'realpython.onfastspring.com', 'onfastspring.com']);
+  ga('send', 'pageview');
+  
+  ga('require', 'ecommerce');
+  
+</script>
+<style type="text/css">.waldo-sticky-footer{position: fixed; width: 100%; bottom: 0px; left: 0px; text-align: center; z-index: 9995;}.waldo-sticky-footer iframe {margin-left: auto;margin-right: auto;}.waldo-sticky-sidebar{position: fixed; top: 10px;z-index: 90}.waldo-sticky-css{position: sticky; top: 10px; z-index: 90}.waldo-overlay{position: fixed;height: 100%;width: 100%;top: 0;left: 0;z-index: 105;background: rgba(0,0,0,0.7);}#waldo-counter {position: absolute;bottom: 0;right: 0;color: #fff;font-size: 30px;padding: 15px;}.waldo-bfleft {position: fixed; left: 0; top: 10px;z-index:101;}.waldo-bfright {position: fixed; right: 0; top: 10px;z-index:101;}div[class^="app_gdpr-"] a {color: #41afbb !important; text-decoration: underline !important}#waldo-close-button a {border: 1px solid rgba(0,0,0,.35);padding: 3px;font-size: 12px;color: #fff;font-weight: bold;background-color: #777;}</style><script type="text/javascript">googletag.cmd.push(function() {gptAdSlots[2168] = googletag.defineSlot('/124067137/realpython728x90FL_1', [[728, 90], [300, 250]], 'waldo-tag-2168').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90], [300, 250]]).addSize([768, 0], [[300, 250]]).addSize([0, 0], [[300, 250]]).build()).addService(googletag.pubads()).setCollapseEmptyDiv(true,true);gptAdSlots[4996] = googletag.defineSlot('/124067137/realpython728x90FS_1', [[728, 90], [300, 250], [320, 50]], 'waldo-tag-4996').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90], [300, 250]]).addSize([768, 0], [[300, 250], [320, 50]]).addSize([0, 0], [[300, 250], [320, 50]]).build()).addService(googletag.pubads()).setCollapseEmptyDiv(true,true);gptAdSlots[4997] = googletag.defineSlot('/8491498/realpython728x90FS_1_Universal_Passback_5d430fd2a1898', [[728, 90], [300, 250]], 'waldo-tag-4997').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90]]).addSize([768, 0], [[300, 250]]).addSize([0, 0], [[300, 250]]).build()).addService(googletag.pubads());gptAdSlots[4998] = googletag.defineSlot('/124067137/realpython728x90FS_2', [[728, 90], [300, 250], [320, 50]], 'waldo-tag-4998').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90], [300, 250]]).addSize([768, 0], [[300, 250], [320, 50]]).addSize([0, 0], [[300, 250], [320, 50]]).build()).addService(googletag.pubads()).setCollapseEmptyDiv(true,true);gptAdSlots[4999] = googletag.defineSlot('/8491498/realpython728x90FS_2_Universal_Passback_5d430fd92d33c', [[728, 90], [300, 250]], 'waldo-tag-4999').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90]]).addSize([768, 0], [[300, 250]]).addSize([0, 0], [[300, 250]]).build()).addService(googletag.pubads());gptAdSlots[5000] = googletag.defineSlot('/124067137/realpython728x90FS_3', [[728, 90], [300, 250], [320, 50]], 'waldo-tag-5000').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90], [300, 250]]).addSize([768, 0], [[300, 250], [320, 50]]).addSize([0, 0], [[300, 250], [320, 50]]).build()).addService(googletag.pubads()).setCollapseEmptyDiv(true,true);gptAdSlots[5001] = googletag.defineSlot('/8491498/realpython728x90FS_3_Universal_Passback_5d430fdf83604', [[728, 90], [300, 250]], 'waldo-tag-5001').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90]]).addSize([768, 0], [[300, 250]]).addSize([0, 0], [[300, 250]]).build()).addService(googletag.pubads());gptAdSlots[5002] = googletag.defineSlot('/124067137/realpython728x90FS_4', [[728, 90], [300, 250], [320, 50]], 'waldo-tag-5002').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90], [300, 250]]).addSize([768, 0], [[300, 250], [320, 50]]).addSize([0, 0], [[300, 250], [320, 50]]).build()).addService(googletag.pubads()).setCollapseEmptyDiv(true,true);gptAdSlots[5003] = googletag.defineSlot('/8491498/realpython728x90FS_4_Universal_Passback_5d430fe599dde', [[728, 90], [300, 250]], 'waldo-tag-5003').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90]]).addSize([768, 0], [[300, 250]]).addSize([0, 0], [[300, 250]]).build()).addService(googletag.pubads());gptAdSlots[5004] = googletag.defineSlot('/124067137/realpython728x90FS_5', [[728, 90], [300, 250], [320, 50]], 'waldo-tag-5004').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90], [300, 250]]).addSize([768, 0], [[300, 250], [320, 50]]).addSize([0, 0], [[300, 250], [320, 50]]).build()).addService(googletag.pubads()).setCollapseEmptyDiv(true,true);gptAdSlots[5005] = googletag.defineSlot('/8491498/realpython728x90FS_5_Universal_Passback_5d430feb2e45f', [[728, 90], [300, 250]], 'waldo-tag-5005').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90]]).addSize([768, 0], [[300, 250]]).addSize([0, 0], [[300, 250]]).build()).addService(googletag.pubads());gptAdSlots[5265] = googletag.defineSlot('/124067137/realpython728x90FS_10', [[728, 90], [300, 250], [320, 50]], 'waldo-tag-5265').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90], [300, 250]]).addSize([768, 0], [[300, 250], [320, 50]]).addSize([0, 0], [[300, 250], [320, 50]]).build()).addService(googletag.pubads()).setCollapseEmptyDiv(true,true);gptAdSlots[5266] = googletag.defineSlot('/8491498/realpython728x90FS_10_Universal_Passback_5d52bf349b4d7', [[728, 90], [300, 250]], 'waldo-tag-5266').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90]]).addSize([768, 0], [[300, 250]]).addSize([0, 0], [[300, 250]]).build()).addService(googletag.pubads());gptAdSlots[5257] = googletag.defineSlot('/124067137/realpython728x90FS_6', [[728, 90], [300, 250], [320, 50]], 'waldo-tag-5257').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90], [300, 250]]).addSize([768, 0], [[300, 250], [320, 50]]).addSize([0, 0], [[300, 250], [320, 50]]).build()).addService(googletag.pubads()).setCollapseEmptyDiv(true,true);gptAdSlots[5258] = googletag.defineSlot('/8491498/realpython728x90FS_6_Universal_Passback_5d52bf0d1950a', [[728, 90], [300, 250]], 'waldo-tag-5258').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90]]).addSize([768, 0], [[300, 250]]).addSize([0, 0], [[300, 250]]).build()).addService(googletag.pubads());gptAdSlots[5259] = googletag.defineSlot('/124067137/realpython728x90FS_7', [[728, 90], [300, 250], [320, 50]], 'waldo-tag-5259').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90], [300, 250]]).addSize([768, 0], [[300, 250], [320, 50]]).addSize([0, 0], [[300, 250], [320, 50]]).build()).addService(googletag.pubads()).setCollapseEmptyDiv(true,true);gptAdSlots[5260] = googletag.defineSlot('/8491498/realpython728x90FS_7_Universal_Passback_5d52bf159c8df', [[728, 90], [300, 250]], 'waldo-tag-5260').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90]]).addSize([768, 0], [[300, 250]]).addSize([0, 0], [[300, 250]]).build()).addService(googletag.pubads());gptAdSlots[5261] = googletag.defineSlot('/124067137/realpython728x90FS_8', [[728, 90], [300, 250], [320, 50]], 'waldo-tag-5261').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90], [300, 250]]).addSize([768, 0], [[300, 250], [320, 50]]).addSize([0, 0], [[300, 250], [320, 50]]).build()).addService(googletag.pubads()).setCollapseEmptyDiv(true,true);gptAdSlots[5262] = googletag.defineSlot('/8491498/realpython728x90FS_8_Universal_Passback_5d52bf2480f67', [[728, 90], [300, 250]], 'waldo-tag-5262').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90]]).addSize([768, 0], [[300, 250]]).addSize([0, 0], [[300, 250]]).build()).addService(googletag.pubads());gptAdSlots[5263] = googletag.defineSlot('/124067137/realpython728x90FS_9', [[728, 90], [300, 250], [320, 50]], 'waldo-tag-5263').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90], [300, 250]]).addSize([768, 0], [[300, 250], [320, 50]]).addSize([0, 0], [[300, 250], [320, 50]]).build()).addService(googletag.pubads()).setCollapseEmptyDiv(true,true);gptAdSlots[5264] = googletag.defineSlot('/8491498/realpython728x90FS_9_Universal_Passback_5d52bf2d3672a', [[728, 90], [300, 250]], 'waldo-tag-5264').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90]]).addSize([768, 0], [[300, 250]]).addSize([0, 0], [[300, 250]]).build()).addService(googletag.pubads());googletag.pubads().enableSingleRequest();googletag.enableServices();googletag.pubads().addEventListener('impressionViewable', function(event) {hb_refresh(event); hb_sroll_pause(event);});googletag.pubads().addEventListener('slotRenderEnded', function(event) {waldoAddCloseBtn(event); waldoPassbackInit(event);waldoInterstitialInit(event);})});</script><link rel="preload" href="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/f.txt" as="script"><script type="text/javascript" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/f.txt"></script><script src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/pubads_impl_2019082201.js" async=""></script><script src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/count-data.js"></script><script src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/OneSignalPageSDKES6.js" async=""></script><style type="text/css">
+  /* === Form-Specific Styles === */
+  /* stylelint-disable */
+
+  #drip-106703 {
+  }
+
+  #drip-106703 .drip-header {
+    background-color: #43ac6a !important;
+  }
+
+  #drip-106703 .drip-content h3 {
+    color: #43ac6a !important;
+    font-size: 29px !important;
+  }
+
+  #drip-106703 .drip-submit-button {
+    background-color: #43ac6a !important;
+    font-size: 19px !important;
+  }
+
+  #drip-106703 .drip-submit-button:hover {
+    background-color: #40a365 !important;
+  }
+
+  #drip-106703 .drip-submit-button:active {
+    background-color: #3c9b5f !important;
+  }
+
+  #drip-106703 dl dt,
+  #drip-106703 .drip-content .drip-description,
+  #drip-106703 .drip-errors {
+    font-size: 18px !important;
+  }
+
+  #drip-106703 .drip-text-field {
+    font-size: 18px !important;
+  }
+
+  /* === Reset styles === */
+
+  .drip-tab h1,
+  .drip-tab h2,
+  .drip-tab h3,
+  .drip-tab div,
+  .drip-tab dl,
+  .drip-tab dt,
+  .drip-tab dd,
+  .drip-tab p,
+  .drip-tab a,
+  .drip-tab .drip-text-field,
+  .drip-tab .drip-text-field:focus,
+  .drip-tab .drip-submit-button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    float: none;
+    width: auto;
+    background-image: none;
+    letter-spacing: 0;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none;
+    -webkit-text-shadow: none !important;
+       -moz-text-shadow: none !important;
+            text-shadow: none !important;
+  }
+
+  .drip-tab a {
+    text-decoration: none;
+    color: #43ac6a !important;
+  }
+
+  .drip-tab :focus {
+    outline: 0;
+  }
+
+  /* === Clearfix === */
+
+  .drip-clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+  * html .drip-clearfix             { zoom: 1; } /* IE6 */
+  *:first-child+html .drip-clearfix { zoom: 1; } /* IE7 */
+
+  /* === Main Container === */
+
+  .drip-tab-container * {
+    box-sizing: content-box;
+  }
+
+  /* === Content === */
+
+  .drip-tab .drip-content {
+    margin: 0;
+    padding: 0;
+    width: 380px;
+    position: fixed;
+    font-size: 100%;
+    font: inherit;
+    z-index: 10000;
+    color: #333;
+    vertical-align: baseline;
+    text-align: left;
+    background-color: #ffffff;
+    -webkit-box-shadow: 0px 10px 28px rgba(0,0,0,0.36);
+       -moz-box-shadow: 0px 10px 28px rgba(0,0,0,0.36);
+            box-shadow: 0px 10px 28px rgba(0,0,0,0.36);
+  }
+
+  .drip-tab.bottom .drip-content {
+    bottom: -800px;
+    -webkit-border-radius: 8px 8px 0 0;
+       -moz-border-radius: 8px 8px 0 0;
+            border-radius: 8px 8px 0 0;
+    -webkit-transition: bottom 200ms ease-in;
+       -moz-transition: bottom 200ms ease-in;
+         -o-transition: bottom 200ms ease-in;
+            transition: bottom 200ms ease-in;
+  }
+
+  .drip-tab.bottom.left .drip-content {
+    left: 40px;
+  }
+
+  .drip-tab.bottom.right .drip-content {
+    right: 40px;
+  }
+
+  .drip-tab.side-image .drip-content {
+    width: 650px;
+  }
+
+  .drip-tab.side .drip-content {
+    top: 10%;
+  }
+
+  .drip-tab.side.right .drip-content {
+    right: -675px;
+    -webkit-border-radius: 8px 0 0 8px;
+       -moz-border-radius: 8px 0 0 8px;
+            border-radius: 8px 0 0 8px;
+    -webkit-transition: right 200ms ease-in;
+       -moz-transition: right 200ms ease-in;
+         -o-transition: right 200ms ease-in;
+            transition: right 200ms ease-in;
+  }
+
+  .drip-tab.side.left .drip-content {
+    left: -675px;
+    -webkit-border-radius: 0 8px 8px 0;
+       -moz-border-radius: 0 8px 8px 0;
+            border-radius: 0 8px 8px 0;
+    -webkit-transition: left 200ms ease-in;
+       -moz-transition: left 200ms ease-in;
+         -o-transition: left 200ms ease-in;
+            transition: left 200ms ease-in;
+  }
+
+  .drip-tab.mobile .drip-content {
+    width: 100% !important;
+    bottom: -800px;
+    left: 0;
+    -webkit-border-radius: 0;
+       -moz-border-radius: 0;
+            border-radius: 0;
+    -webkit-transition: bottom 200ms ease-in;
+       -moz-transition: bottom 200ms ease-in;
+         -o-transition: bottom 200ms ease-in;
+            transition: bottom 200ms ease-in;
+  }
+
+  .drip-tab.drip-scrollable .drip-content {
+    overflow-y: scroll;
+  }
+
+  /* === Header === */
+
+  .drip-tab .drip-header {
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    font-size: 100%;
+    font: inherit;
+    z-index: 10000;
+    color: #333;
+    vertical-align: baseline;
+    text-align: left;
+    -webkit-border-radius: 8px 8px 0 0;
+       -moz-border-radius: 8px 8px 0 0;
+            border-radius: 8px 8px 0 0;
+    -webkit-box-shadow: 0px 10px 28px rgba(0,0,0,0.36);
+       -moz-box-shadow: 0px 10px 28px rgba(0,0,0,0.36);
+            box-shadow: 0px 10px 28px rgba(0,0,0,0.36);
+  }
+
+  .drip-tab.bottom .drip-header {
+    width: 380px;
+    bottom: 0;
+    -webkit-transition: bottom 200ms ease-in;
+       -moz-transition: bottom 200ms ease-in;
+         -o-transition: bottom 200ms ease-in;
+            transition: bottom 200ms ease-in;
+  }
+
+  .drip-tab.bottom .drip-header.drip-hidden {
+    bottom: -800px;
+  }
+
+  .drip-tab.bottom.left .drip-header {
+    left: 40px;
+  }
+
+  .drip-tab.bottom.right .drip-header {
+    right: 40px;
+  }
+
+  .drip-tab.bottom.image-left .drip-header,
+  .drip-tab.bottom.image-right .drip-header {
+    width: 510px;
+  }
+
+  .drip-tab.side .drip-header {
+    width: 340px;
+    top: 10%;
+  }
+
+  .drip-tab.side.right .drip-header {
+    right: -100px;
+    -webkit-transition: right 400ms ease-in;
+       -moz-transition: right 400ms ease-in;
+         -o-transition: right 400ms ease-in;
+            transition: right 400ms ease-in;
+    -webkit-transform: rotate(-90deg) !important;
+       -moz-transform: rotate(-90deg) !important;
+        -ms-transform: rotate(-90deg) !important;
+         -o-transform: rotate(-90deg) !important;
+            transform: rotate(-90deg) !important;
+    -webkit-transform-origin: right center;
+       -moz-transform-origin: right center;
+         -o-transform-origin: right center;
+            transform-origin: right center;
+  }
+
+  .drip-tab.side.right .drip-header.drip-hidden {
+    right: -100px;
+  }
+
+  .drip-tab.side.left .drip-header {
+    left: -100px;
+    -webkit-transition: left 400ms ease-in;
+       -moz-transition: left 400ms ease-in;
+         -o-transition: left 400ms ease-in;
+            transition: left 400ms ease-in;
+    -webkit-transform: rotate(90deg) !important;
+       -moz-transform: rotate(90deg) !important;
+        -ms-transform: rotate(90deg) !important;
+         -o-transform: rotate(90deg) !important;
+            transform: rotate(90deg) !important;
+    -webkit-transform-origin: left center;
+       -moz-transform-origin: left center;
+         -o-transform-origin: left center;
+            transform-origin: left center;
+  }
+
+  .drip-tab.side.left .drip-header.drip-hidden {
+    left: -100px;
+  }
+
+  .drip-tab.mobile .drip-header {
+    width: 100% !important;
+    bottom: 0;
+    left: 0;
+    -webkit-border-radius: 0;
+       -moz-border-radius: 0;
+            border-radius: 0;
+    -webkit-transition: bottom 200ms ease-in;
+       -moz-transition: bottom 200ms ease-in;
+         -o-transition: bottom 200ms ease-in;
+            transition: bottom 200ms ease-in;
+  }
+
+  .drip-tab.mobile .drip-header.drip-hidden {
+    bottom: -300px;
+  }
+
+  /* === Header Toggle === */
+
+  .drip-tab .drip-toggle {
+    display: block;
+    text-decoration: none;
+    padding: 10px 50px 10px 25px; /* extra padding for the arrow */
+  }
+
+  /* === Teaser === */
+
+  .drip-tab .drip-header h2 {
+    display: block;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    color: #fff !important;
+    clear: none !important;
+    letter-spacing: 0 !important;
+    width: auto !important;
+  }
+
+  /* === Arrows === */
+
+  .drip-tab .drip-header span.drip-arrow {
+    display: block;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    top: 20px;
+    right: 32px;
+  }
+
+  /* === Panel === */
+
+  .drip-tab .drip-content > div.drip-panel {
+    padding: 25px;
+    background-color: #fff;
+    -webkit-border-radius: 6px;
+       -moz-border-radius: 6px;
+            border-radius: 6px;
+  }
+
+  .drip-tab.bottom .drip-content > div.drip-panel {
+    -webkit-border-radius: 6px 6px 0 0;
+       -moz-border-radius: 6px 6px 0 0;
+            border-radius: 6px 6px 0 0;
+  }
+
+  .drip-tab.side.left .drip-content > div.drip-panel {
+    -webkit-border-radius: 0 6px 6px 0;
+       -moz-border-radius: 0 6px 6px 0;
+            border-radius: 0 6px 6px 0;
+  }
+
+  .drip-tab.side.right .drip-content > div.drip-panel  {
+    -webkit-border-radius: 6px 0 0 6px;
+       -moz-border-radius: 6px 0 0 6px;
+            border-radius: 6px 0 0 6px;
+  }
+
+  /* === Powered By === */
+
+  .drip-tab .drip-powered-by {
+    padding: 8px;
+    text-align: left;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 16px;
+    color: #A8ACB9;
+    text-align: right;
+    margin-right: 25px;
+    text-transform: uppercase;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .drip-tab .drip-powered-by a {
+    color: #A8ACB9 !important;
+    text-decoration: underline !important;
+    margin-left: 6px;
+  }
+
+  /* === Content Sections === */
+
+  .drip-tab.side-image .drip-form-aside {
+    width: 245px;
+    text-align: center;
+  }
+
+  .drip-tab.image-left .drip-form-main {
+    margin-left: 270px;
+  }
+
+  .drip-tab.image-right .drip-form-main {
+    margin-right: 270px;
+  }
+
+  .drip-tab.image-left .drip-form-aside {
+    float: left;
+  }
+
+  .drip-tab.image-right .drip-form-aside {
+    float: right;
+  }
+
+  @media screen and (max-width: 650px) {
+    .drip-tab.side-image .drip-content {
+      width: 380px;
+    }
+
+    .drip-tab.side-image .drip-form-main {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .drip-tab.side-image .drip-form-aside {
+      display: none;
+    }
+  }
+
+  /* === Content Headings & Paragraphs === */
+
+  .drip-tab .drip-content h3 {
+    display: block;
+    margin: 0 20px 0 0 !important;
+    padding: 0 0 15px 0 !important;
+    line-height: 1.4 !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    color: #4477bd !important;
+    clear: none !important;
+  }
+
+  .drip-tab .drip-content .drip-description {
+    margin: 0;
+    padding: 0 0 20px 0;
+    line-height: 1.4;
+    text-align: left;
+    color: #4F5362;
+  }
+
+  .drip-tab .drip-content .drip-post-submission {
+    padding: 0;
+  }
+
+  .drip-tab .drip-content .drip-description a {
+    text-decoration: underline;
+  }
+
+  .drip-tab .drip-content .drip-description em {
+    font-style: italic;
+  }
+
+  .drip-tab .drip-content .drip-description ul,
+  .drip-tab .drip-content .drip-description ol {
+    list-style-position: outside;
+    margin: 8px 0 8px 30px;
+  }
+
+  .drip-tab .drip-content .drip-description ul li
+  .drip-tab .drip-content .drip-description ol li {
+    padding: 0;
+  }
+
+  .drip-tab .drip-content .drip-image-center-helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+
+  .drip-tab .drip-content img.drip-image {
+    max-width: 245px;
+    vertical-align: middle;
+  }
+
+  .drip-tab .drip-content a.drip-close {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+  }
+
+  .drip-tab .drip-content a.drip-close:hover {
+    cursor: pointer;
+  }
+
+  /* === Content Subscribe Form === */
+
+  .drip-tab form {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .drip-tab dl {
+    display: block;
+    margin: 0;
+    padding: 0 0 5px 0;
+  }
+
+  .drip-tab dl dt {
+    display: block;
+    padding: 0 0 5px 0;
+    font-weight: bold;
+    color: #4F5362;
+  }
+
+  .drip-tab dl.no-labels dt {
+    display: none;
+  }
+
+  .drip-tab dl dd {
+    display: block;
+    padding: 0 0 8px 0;
+  }
+
+  .drip-tab .drip-text-field {
+    margin: 0 !important;
+    padding: 10px 12px !important;
+    height: auto !important;
+    width: 100% !important;
+    color: #4F5362 !important;
+    background-color: #fff !important;
+    border: 1px solid #A8ACB9 !important;
+    -webkit-border-radius: 3px !important;
+       -moz-border-radius: 3px !important;
+            border-radius: 3px !important;
+    -webkit-box-sizing: border-box !important;
+       -moz-box-sizing: border-box !important;
+        -ms-box-sizing: border-box !important;
+            box-sizing: border-box !important;
+    background-image: none !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .drip-tab .drip-text-field::-webkit-input-placeholder { /* WebKit browsers */
+    color: #A8ACB9 !important;
+  }
+  .drip-tab .drip-text-field:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #A8ACB9 !important;
+  }
+  .drip-tab .drip-text-field::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #A8ACB9 !important;
+  }
+  .drip-tab .drip-text-field:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #A8ACB9 !important;
+  }
+
+  .drip-tab .drip-text-field:focus {
+    border-color: #9398a9 !important;
+    outline: 0;
+    background-image: none;
+    background-color: #fff !important;
+  }
+
+  .drip-tab.mobile .drip-text-field {
+    font-size: 16px;
+  }
+
+  .drip-tab .drip-errors {
+    padding: 5px 0 0 0;
+    font-weight: normal;
+    color: red;
+  }
+
+  .drip-tab .drip-submit-button {
+    padding: 6px 26px !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    line-height: 1.6 !important;
+    border: 0 !important;
+    -webkit-border-radius: 3px !important;
+       -moz-border-radius: 3px !important;
+            border-radius: 3px !important;
+    cursor: pointer !important;
+    background-image: none !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: auto;
+    transition: background 0.2s ease !important;
+  }
+
+  .drip-tab .drip-submit-button:hover {
+    background-image: none !important;
+  }
+
+  .drip-tab .drip-submit-button:active {
+    background-image: none !important;
+  }
+
+  /* checkbox */
+
+  .drip-tab input,
+  .drip-tab textarea {
+    display: block;
+    box-shadow: none;
+    position: relative;
+    border: 1px solid #cccccc;
+    outline: none;
+    border-radius: 3px;
+    font: inherit;
+    color: #262626;
+    padding: 12px 18px;
+    transition: border-color 300ms;
+    width: 100%;
+  }
+
+  .drip-tab .zenput--checkbox.hidden {
+    margin-bottom: -8px;
+    display: none;
+  }
+
+  .drip-tab .zenput--checkbox input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .drip-tab .zenput--checkbox input[type="checkbox"] ~ .zenput__checkbox-label {
+    font: inherit;
+    font-size: 16px;
+    line-height: 30px;
+    color: #262626;
+    cursor: pointer;
+    white-space: normal;
+    word-break: normal;
+    display: block;
+    padding-left: 36px;
+    position: relative;
+    transition: color 300ms
+  }
+
+  .drip-tab .zenput--checkbox input[type="checkbox"]~ .zenput__checkbox-label .zenput__checkbox-label__icon {
+    content: "";
+    display: block;
+    background: #f5f5f5;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 3px;
+    left: 0;
+    border-radius: 3px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+    padding: 3px;
+    transition: background 300ms ease-out, border-color 300ms;
+  }
+
+  .drip-tab .zenput--checkbox input[type="checkbox"] ~ .zenput__checkbox-label .zenput__checkbox-label__icon svg {
+    opacity: 0;
+    width: 16px;
+    display: block;
+    fill: #cccccc;
+    transition: opacity 300ms ease-out;
+  }
+
+  .drip-tab .zenput--checkbox input[type="checkbox"]:checked ~ .zenput__checkbox-label {
+    color: #333 !important;
+  }
+  .drip-tab .zenput--checkbox input[type="checkbox"]:checked ~ .zenput__checkbox-label .zenput__checkbox-label__icon {
+    background-color: #ffffff;
+    border-color: #a8acb9;
+  }
+  .drip-tab .zenput--checkbox input[type="checkbox"]:checked ~ .zenput__checkbox-label .zenput__checkbox-label__icon svg {
+    fill: #43ac6a !important;
+    opacity: 1;
+  }
+
+  /* hover state */
+
+  .drip-tab .zenput--checkbox input:not([disabled]):not(:checked) ~ .zenput__checkbox-label:hover {
+    color: #262626;
+  }
+
+  .drip-tab .zenput--checkbox input:not([disabled]):not(:checked) ~ .zenput__checkbox-label:hover  .zenput__checkbox-label__icon {
+    border-color: var(--gray-9);
+  }
+
+  .drip-tab .zenput--checkbox input:not([disabled]):not(:checked) ~ .zenput__checkbox-label:hover  .zenput__checkbox-label__icon svg {
+    opacity: 1;
+  }
+
+  /* active state */
+
+  .drip-tab .zenput--checkbox input:not([disabled]) ~ .zenput__checkbox-label:active {
+    color: #f224f2;
+  }
+
+  /* focus state */
+
+  .drip-tab .zenput--checkbox input:not([disabled]) ~ .zenput__checkbox-label:focus .zenput__checkbox-label__icon,
+  .drip-tab .zenput--checkbox input:not([disabled]):focus ~ .zenput__checkbox-label .zenput__checkbox-label__icon {
+    border-color: #262626;
+  }
+
+  /* stylelint-enable */
+
+</style><style type="text/css">
+  /* === Form-Specific Styles === */
+  /* stylelint-disable */
+
+  #drip-108609 {
+    background: #fff !important;
+  }
+
+  #drip-108609 .drip-content h3 {
+    color: #f9a82f !important;
+    font-size: 28px !important;
+  }
+
+  #drip-108609 .drip-submit-button {
+    background-color: #f9a82f !important;
+    font-size: 19px !important;
+  }
+
+  #drip-108609 .drip-submit-button:hover {
+    background-color: #eda02d !important;
+  }
+
+  #drip-108609 .drip-submit-button:active {
+    background-color: #e0972a !important;
+  }
+
+  #drip-108609 dl dt,
+  #drip-108609 .drip-content .drip-description,
+  #drip-108609 .drip-errors {
+    font-size: 16px !important;
+  }
+
+  #drip-108609 .drip-text-field {
+    font-size: 16px !important;
+  }
+
+  /* === Reset styles === */
+
+  .drip-lightbox h1,
+  .drip-lightbox h2,
+  .drip-lightbox h3,
+  .drip-lightbox div,
+  .drip-lightbox dl,
+  .drip-lightbox dt,
+  .drip-lightbox dd,
+  .drip-lightbox p,
+  .drip-lightbox a,
+  .drip-lightbox .drip-text-field,
+  .drip-lightbox .drip-text-field:focus,
+  .drip-lightbox .drip-submit-button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    float: none;
+    width: auto;
+    background-image: none;
+    letter-spacing: 0;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none;
+    -webkit-text-shadow: none !important;
+       -moz-text-shadow: none !important;
+            text-shadow: none !important;
+  }
+
+  .drip-lightbox a {
+    text-decoration: none;
+    color: #f9a82f !important;
+  }
+
+  .drip-lightbox :focus {
+    outline: 0;
+  }
+
+  .drip-lightbox input::-webkit-input-placeholder { /* WebKit browsers */
+    color: #A8ACB9 !important;
+  }
+  .drip-lightbox input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #A8ACB9 !important;
+  }
+  .drip-lightbox input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #A8ACB9 !important;
+  }
+  .drip-lightbox input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #A8ACB9 !important;
+  }
+
+  /* === Clearfix === */
+
+  .drip-clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+  * html .drip-clearfix             { zoom: 1; } /* IE6 */
+  *:first-child+html .drip-clearfix { zoom: 1; } /* IE7 */
+
+  /* === Backdrop === */
+
+  .drip-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    background-color: #000;
+    opacity: 0;
+    -webkit-transition: opacity .3s linear;
+       -moz-transition: opacity .3s linear;
+         -o-transition: opacity .3s linear;
+            transition: opacity .3s linear;
+  }
+
+  .drip-backdrop.drip-in {
+    opacity: 0.2;
+  }
+
+  .drip-backdrop.drip-hidden {
+    display: none;
+  }
+
+  /* === Main Container === */
+
+  .drip-lightbox-wrapper * {
+    box-sizing: content-box;
+  }
+
+  /* === Content === */
+
+  .drip-lightbox .drip-content {
+    margin: 0 0 0 -190px;
+    padding: 0;
+    position: fixed;
+    width: 380px;
+    top: -25%;
+    left: 50%;
+    font-size: 100%;
+    z-index: 11000;
+    color: #333;
+    vertical-align: baseline;
+    background-color: #ffffff;
+    opacity: 0;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+    -webkit-box-shadow: 0px 10px 28px rgba(0,0,0,0.36);
+       -moz-box-shadow: 0px 10px 28px rgba(0,0,0,0.36);
+            box-shadow: 0px 10px 28px rgba(0,0,0,0.36);
+    -webkit-transition: opacity .3s linear, top .3s ease-out, bottom 200ms ease-in;
+       -moz-transition: opacity .3s linear, top .3s ease-out, bottom 200ms ease-in;;
+         -o-transition: opacity .3s linear, top .3s ease-out, bottom 200ms ease-in;;
+            transition: opacity .3s linear, top .3s ease-out, bottom 200ms ease-in;;
+  }
+
+  .drip-lightbox.drip-in .drip-content {
+    top: 15%;
+    opacity: 1;
+  }
+
+  .drip-lightbox.drip-hidden .drip-content {
+    display: none;
+  }
+
+  .drip-lightbox.side-image .drip-content {
+    margin-left: -325px;
+    width: 650px;
+  }
+
+  .drip-lightbox.mobile .drip-content {
+    margin: 0;
+    width: 100%;
+    left: 0;
+    top: auto;
+    -webkit-border-radius: 0;
+       -moz-border-radius: 0;
+            border-radius: 0;
+  }
+
+  .drip-lightbox.mobile.drip-in .drip-content {
+    top: auto;
+    bottom: 0;
+  }
+
+  .drip-lightbox.drip-scrollable .drip-content {
+    overflow-y: scroll;
+  }
+
+  /* === Teaser === */
+
+  .drip-lightbox .drip-header h2 {
+    display: block;
+    margin: 0 !important;
+    padding: 12px 0 !important;
+    font-size: 14px !important;
+    line-height: 13px !important;
+    font-weight: bold !important;
+    color: #fff !important;
+    letter-spacing: 0 !important;
+  }
+
+  /* === Panel === */
+
+  .drip-lightbox .drip-content > div.drip-panel {
+    padding: 25px;
+    background-color: #fff;
+    -webkit-border-radius: 6px;
+       -moz-border-radius: 6px;
+            border-radius: 6px;
+  }
+
+  /* === Powered By === */
+
+  .drip-lightbox .drip-powered-by {
+    padding: 8px;
+    text-align: left;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 16px;
+    color: #A8ACB9;
+    text-align: right;
+    margin-right: 25px;
+    text-transform: uppercase;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .drip-lightbox .drip-powered-by a {
+    color: #A8ACB9 !important;
+    text-decoration: underline !important;
+    margin-left: 6px;
+  }
+
+  /* === Content Sections === */
+
+  .drip-lightbox.side-image .drip-form-aside {
+    width: 245px;
+    text-align: center;
+  }
+
+  .drip-lightbox.image-left .drip-form-main {
+    margin-left: 270px;
+  }
+
+  .drip-lightbox.image-right .drip-form-main {
+    margin-right: 270px;
+  }
+
+  .drip-lightbox.image-left .drip-form-aside {
+    float: left;
+  }
+
+  .drip-lightbox.image-right .drip-form-aside {
+    float: right;
+  }
+
+  @media screen and (max-width: 650px) {
+    /* prevent overriding mobile class styles */
+    .drip-lightbox.side-image:not(.mobile) .drip-content {
+      margin-left: -190px;
+      width: 380px;
+    }
+
+    .drip-lightbox.side-image .drip-form-main {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .drip-lightbox.side-image .drip-form-aside {
+      display: none;
+    }
+  }
+
+  /* === Content Headings & Paragraphs === */
+
+  .drip-lightbox .drip-content h3 {
+    display: block;
+    margin: 0 20px 0 0 !important;
+    padding: 0 0 15px 0 !important;
+    line-height: 1.4 !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    color: #4477bd !important;
+    clear: none !important;
+  }
+
+  .drip-lightbox .drip-content .drip-description {
+    margin: 0;
+    padding: 0 0 20px 0;
+    line-height: 1.6;
+    text-align: left;
+  }
+
+  .drip-lightbox .drip-content .drip-post-submission {
+    padding: 0;
+  }
+
+  .drip-lightbox .drip-content .drip-description a {
+    text-decoration: underline;
+  }
+
+  .drip-lightbox .drip-content .drip-description em {
+    font-style: italic;
+  }
+
+  .drip-lightbox .drip-content .drip-description ul,
+  .drip-lightbox .drip-content .drip-description ol {
+    list-style-position: outside;
+    margin: 8px 0 8px 30px;
+  }
+
+  .drip-lightbox .drip-content .drip-description ul li
+  .drip-lightbox .drip-content .drip-description ol li {
+    padding: 0;
+  }
+
+  .drip-lightbox .drip-content img.drip-image {
+    margin-bottom: 20px;
+  }
+
+  .drip-lightbox .drip-content .drip-image-center-helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+
+  .drip-lightbox .drip-content img.drip-image {
+    max-width: 245px;
+    vertical-align: middle;
+  }
+
+  .drip-lightbox .drip-content a.drip-close {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+  }
+
+  .drip-lightbox .drip-content a.drip-close:hover {
+    cursor: pointer;
+  }
+
+  /* === Content Subscribe Form === */
+
+  .drip-lightbox form {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .drip-lightbox dl {
+    display: block;
+    margin: 0;
+    padding: 0 0 5px 0;
+  }
+
+  .drip-lightbox dl dt {
+    display: block;
+    padding: 0 0 5px 0;
+    /* font-size: 13px; */
+    font-weight: bold;
+  }
+
+  .drip-lightbox dl.no-labels dt {
+    display: none;
+  }
+
+  .drip-lightbox dl dd {
+    display: block;
+    padding: 0 0 8px 0;
+  }
+
+  .drip-lightbox .drip-text-field {
+    margin: 0 !important;
+    padding: 10px 12px !important;
+    height: auto !important;
+    width: 100% !important;
+    color: #4F5362 !important;
+    background-color: #fff !important;
+    border: 1px solid #A8ACB9 !important;
+    -webkit-border-radius: 3px !important;
+       -moz-border-radius: 3px !important;
+            border-radius: 3px !important;
+    -webkit-box-sizing: border-box !important;
+       -moz-box-sizing: border-box !important;
+        -ms-box-sizing: border-box !important;
+            box-sizing: border-box !important;
+    background-image: none !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .drip-lightbox .drip-text-field:focus {
+    border-color: #9398a9 !important;
+    outline: 0;
+    background-image: none;
+    background-color: #fff !important;
+  }
+
+  .drip-lightbox.mobile .drip-text-field {
+    font-size: 16px;
+  }
+
+  .drip-lightbox .drip-errors {
+    padding: 5px 0 0 0;
+    font-weight: normal;
+    color: red;
+  }
+
+  .drip-lightbox .drip-submit-button {
+    padding: 6px 26px !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    line-height: 1.6 !important;
+    border: 0 !important;
+    -webkit-border-radius: 3px !important;
+       -moz-border-radius: 3px !important;
+            border-radius: 3px !important;
+    cursor: pointer !important;
+    background-image: none !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: auto;
+    transition: background 0.2s ease !important;
+    -webkit-box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
+       -moz-box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
+            box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
+  }
+
+  .drip-lightbox .drip-submit-button:hover {
+    background-image: none !important;
+  }
+
+  .drip-lightbox .drip-submit-button:active {
+    background-image: none !important;
+  }
+
+  /* checkbox */
+
+  .drip-lightbox input,
+  .drip-lightbox textarea {
+    display: block;
+    box-shadow: none;
+    position: relative;
+    border: 1px solid #cccccc;
+    outline: none;
+    border-radius: 3px;
+    font: inherit;
+    color: #262626;
+    padding: 12px 18px;
+    transition: border-color 300ms;
+    width: 100%;
+  }
+
+  .drip-lightbox .zenput--checkbox.hidden {
+    margin-bottom: -8px;
+    display: none;
+  }
+
+  .drip-lightbox .zenput--checkbox input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .drip-lightbox .zenput--checkbox input[type="checkbox"] ~ .zenput__checkbox-label {
+    font: inherit;
+    font-size: 16px;
+    line-height: 30px;
+    color: #262626;
+    cursor: pointer;
+    white-space: normal;
+    word-break: break-word;
+    display: block;
+    padding-left: 36px;
+    position: relative;
+    transition: color 300ms
+  }
+
+  .drip-lightbox .zenput--checkbox input[type="checkbox"] ~ .zenput__checkbox-label .zenput__checkbox-label__icon {
+    content: "";
+    display: block;
+    background: #f5f5f5;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 3px;
+    left: 0;
+    border-radius: 3px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+    padding: 3px;
+    transition: background 300ms ease-out, border-color 300ms;
+  }
+
+  .drip-lightbox .zenput--checkbox input[type="checkbox"] ~ .zenput__checkbox-label .zenput__checkbox-label__icon svg {
+    opacity: 0;
+    width: 16px;
+    display: block;
+    fill: #cccccc;
+    transition: opacity 300ms ease-out;
+  }
+
+  .drip-lightbox .zenput--checkbox .zenput__checkbox-label .zenput__checkbox-label__icon .octicon-dash {
+    display: none;
+  }
+
+  .drip-lightbox .zenput--checkbox input[type="checkbox"]:checked ~ .zenput__checkbox-label {
+    color: #333 !important;
+  }
+  .drip-lightbox .zenput--checkbox input[type="checkbox"]:checked ~ .zenput__checkbox-label .zenput__checkbox-label__icon {
+    background-color: #ffffff;
+    border-color: #a8acb9;
+  }
+  .drip-lightbox .zenput--checkbox input[type="checkbox"]:checked ~ .zenput__checkbox-label .zenput__checkbox-label__icon svg {
+    fill: #f9a82f !important;
+    opacity: 1;
+  }
+  /* stylelint-enable */
+
+</style><style type="text/css">
+  /* === Form-Specific Styles === */
+  /* stylelint-disable */
+
+  #drip-108599 {
+    background: #fff !important;
+  }
+
+  #drip-108599 .drip-content h3 {
+    color: #f9a82f !important;
+    font-size: 28px !important;
+  }
+
+  #drip-108599 .drip-submit-button {
+    background-color: #f9a82f !important;
+    font-size: 19px !important;
+  }
+
+  #drip-108599 .drip-submit-button:hover {
+    background-color: #eda02d !important;
+  }
+
+  #drip-108599 .drip-submit-button:active {
+    background-color: #e0972a !important;
+  }
+
+  #drip-108599 dl dt,
+  #drip-108599 .drip-content .drip-description,
+  #drip-108599 .drip-errors {
+    font-size: 16px !important;
+  }
+
+  #drip-108599 .drip-text-field {
+    font-size: 16px !important;
+  }
+
+  /* === Reset styles === */
+
+  .drip-lightbox h1,
+  .drip-lightbox h2,
+  .drip-lightbox h3,
+  .drip-lightbox div,
+  .drip-lightbox dl,
+  .drip-lightbox dt,
+  .drip-lightbox dd,
+  .drip-lightbox p,
+  .drip-lightbox a,
+  .drip-lightbox .drip-text-field,
+  .drip-lightbox .drip-text-field:focus,
+  .drip-lightbox .drip-submit-button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    float: none;
+    width: auto;
+    background-image: none;
+    letter-spacing: 0;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none;
+    -webkit-text-shadow: none !important;
+       -moz-text-shadow: none !important;
+            text-shadow: none !important;
+  }
+
+  .drip-lightbox a {
+    text-decoration: none;
+    color: #f9a82f !important;
+  }
+
+  .drip-lightbox :focus {
+    outline: 0;
+  }
+
+  .drip-lightbox input::-webkit-input-placeholder { /* WebKit browsers */
+    color: #A8ACB9 !important;
+  }
+  .drip-lightbox input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #A8ACB9 !important;
+  }
+  .drip-lightbox input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #A8ACB9 !important;
+  }
+  .drip-lightbox input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #A8ACB9 !important;
+  }
+
+  /* === Clearfix === */
+
+  .drip-clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+  * html .drip-clearfix             { zoom: 1; } /* IE6 */
+  *:first-child+html .drip-clearfix { zoom: 1; } /* IE7 */
+
+  /* === Backdrop === */
+
+  .drip-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    background-color: #000;
+    opacity: 0;
+    -webkit-transition: opacity .3s linear;
+       -moz-transition: opacity .3s linear;
+         -o-transition: opacity .3s linear;
+            transition: opacity .3s linear;
+  }
+
+  .drip-backdrop.drip-in {
+    opacity: 0.2;
+  }
+
+  .drip-backdrop.drip-hidden {
+    display: none;
+  }
+
+  /* === Main Container === */
+
+  .drip-lightbox-wrapper * {
+    box-sizing: content-box;
+  }
+
+  /* === Content === */
+
+  .drip-lightbox .drip-content {
+    margin: 0 0 0 -190px;
+    padding: 0;
+    position: fixed;
+    width: 380px;
+    top: -25%;
+    left: 50%;
+    font-size: 100%;
+    z-index: 11000;
+    color: #333;
+    vertical-align: baseline;
+    background-color: #ffffff;
+    opacity: 0;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+    -webkit-box-shadow: 0px 10px 28px rgba(0,0,0,0.36);
+       -moz-box-shadow: 0px 10px 28px rgba(0,0,0,0.36);
+            box-shadow: 0px 10px 28px rgba(0,0,0,0.36);
+    -webkit-transition: opacity .3s linear, top .3s ease-out, bottom 200ms ease-in;
+       -moz-transition: opacity .3s linear, top .3s ease-out, bottom 200ms ease-in;;
+         -o-transition: opacity .3s linear, top .3s ease-out, bottom 200ms ease-in;;
+            transition: opacity .3s linear, top .3s ease-out, bottom 200ms ease-in;;
+  }
+
+  .drip-lightbox.drip-in .drip-content {
+    top: 15%;
+    opacity: 1;
+  }
+
+  .drip-lightbox.drip-hidden .drip-content {
+    display: none;
+  }
+
+  .drip-lightbox.side-image .drip-content {
+    margin-left: -325px;
+    width: 650px;
+  }
+
+  .drip-lightbox.mobile .drip-content {
+    margin: 0;
+    width: 100%;
+    left: 0;
+    top: auto;
+    -webkit-border-radius: 0;
+       -moz-border-radius: 0;
+            border-radius: 0;
+  }
+
+  .drip-lightbox.mobile.drip-in .drip-content {
+    top: auto;
+    bottom: 0;
+  }
+
+  .drip-lightbox.drip-scrollable .drip-content {
+    overflow-y: scroll;
+  }
+
+  /* === Teaser === */
+
+  .drip-lightbox .drip-header h2 {
+    display: block;
+    margin: 0 !important;
+    padding: 12px 0 !important;
+    font-size: 14px !important;
+    line-height: 13px !important;
+    font-weight: bold !important;
+    color: #fff !important;
+    letter-spacing: 0 !important;
+  }
+
+  /* === Panel === */
+
+  .drip-lightbox .drip-content > div.drip-panel {
+    padding: 25px;
+    background-color: #fff;
+    -webkit-border-radius: 6px;
+       -moz-border-radius: 6px;
+            border-radius: 6px;
+  }
+
+  /* === Powered By === */
+
+  .drip-lightbox .drip-powered-by {
+    padding: 8px;
+    text-align: left;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 16px;
+    color: #A8ACB9;
+    text-align: right;
+    margin-right: 25px;
+    text-transform: uppercase;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .drip-lightbox .drip-powered-by a {
+    color: #A8ACB9 !important;
+    text-decoration: underline !important;
+    margin-left: 6px;
+  }
+
+  /* === Content Sections === */
+
+  .drip-lightbox.side-image .drip-form-aside {
+    width: 245px;
+    text-align: center;
+  }
+
+  .drip-lightbox.image-left .drip-form-main {
+    margin-left: 270px;
+  }
+
+  .drip-lightbox.image-right .drip-form-main {
+    margin-right: 270px;
+  }
+
+  .drip-lightbox.image-left .drip-form-aside {
+    float: left;
+  }
+
+  .drip-lightbox.image-right .drip-form-aside {
+    float: right;
+  }
+
+  @media screen and (max-width: 650px) {
+    /* prevent overriding mobile class styles */
+    .drip-lightbox.side-image:not(.mobile) .drip-content {
+      margin-left: -190px;
+      width: 380px;
+    }
+
+    .drip-lightbox.side-image .drip-form-main {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .drip-lightbox.side-image .drip-form-aside {
+      display: none;
+    }
+  }
+
+  /* === Content Headings & Paragraphs === */
+
+  .drip-lightbox .drip-content h3 {
+    display: block;
+    margin: 0 20px 0 0 !important;
+    padding: 0 0 15px 0 !important;
+    line-height: 1.4 !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    color: #4477bd !important;
+    clear: none !important;
+  }
+
+  .drip-lightbox .drip-content .drip-description {
+    margin: 0;
+    padding: 0 0 20px 0;
+    line-height: 1.6;
+    text-align: left;
+  }
+
+  .drip-lightbox .drip-content .drip-post-submission {
+    padding: 0;
+  }
+
+  .drip-lightbox .drip-content .drip-description a {
+    text-decoration: underline;
+  }
+
+  .drip-lightbox .drip-content .drip-description em {
+    font-style: italic;
+  }
+
+  .drip-lightbox .drip-content .drip-description ul,
+  .drip-lightbox .drip-content .drip-description ol {
+    list-style-position: outside;
+    margin: 8px 0 8px 30px;
+  }
+
+  .drip-lightbox .drip-content .drip-description ul li
+  .drip-lightbox .drip-content .drip-description ol li {
+    padding: 0;
+  }
+
+  .drip-lightbox .drip-content img.drip-image {
+    margin-bottom: 20px;
+  }
+
+  .drip-lightbox .drip-content .drip-image-center-helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+
+  .drip-lightbox .drip-content img.drip-image {
+    max-width: 245px;
+    vertical-align: middle;
+  }
+
+  .drip-lightbox .drip-content a.drip-close {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+  }
+
+  .drip-lightbox .drip-content a.drip-close:hover {
+    cursor: pointer;
+  }
+
+  /* === Content Subscribe Form === */
+
+  .drip-lightbox form {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .drip-lightbox dl {
+    display: block;
+    margin: 0;
+    padding: 0 0 5px 0;
+  }
+
+  .drip-lightbox dl dt {
+    display: block;
+    padding: 0 0 5px 0;
+    /* font-size: 13px; */
+    font-weight: bold;
+  }
+
+  .drip-lightbox dl.no-labels dt {
+    display: none;
+  }
+
+  .drip-lightbox dl dd {
+    display: block;
+    padding: 0 0 8px 0;
+  }
+
+  .drip-lightbox .drip-text-field {
+    margin: 0 !important;
+    padding: 10px 12px !important;
+    height: auto !important;
+    width: 100% !important;
+    color: #4F5362 !important;
+    background-color: #fff !important;
+    border: 1px solid #A8ACB9 !important;
+    -webkit-border-radius: 3px !important;
+       -moz-border-radius: 3px !important;
+            border-radius: 3px !important;
+    -webkit-box-sizing: border-box !important;
+       -moz-box-sizing: border-box !important;
+        -ms-box-sizing: border-box !important;
+            box-sizing: border-box !important;
+    background-image: none !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .drip-lightbox .drip-text-field:focus {
+    border-color: #9398a9 !important;
+    outline: 0;
+    background-image: none;
+    background-color: #fff !important;
+  }
+
+  .drip-lightbox.mobile .drip-text-field {
+    font-size: 16px;
+  }
+
+  .drip-lightbox .drip-errors {
+    padding: 5px 0 0 0;
+    font-weight: normal;
+    color: red;
+  }
+
+  .drip-lightbox .drip-submit-button {
+    padding: 6px 26px !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    line-height: 1.6 !important;
+    border: 0 !important;
+    -webkit-border-radius: 3px !important;
+       -moz-border-radius: 3px !important;
+            border-radius: 3px !important;
+    cursor: pointer !important;
+    background-image: none !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: auto;
+    transition: background 0.2s ease !important;
+    -webkit-box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
+       -moz-box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
+            box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
+  }
+
+  .drip-lightbox .drip-submit-button:hover {
+    background-image: none !important;
+  }
+
+  .drip-lightbox .drip-submit-button:active {
+    background-image: none !important;
+  }
+
+  /* checkbox */
+
+  .drip-lightbox input,
+  .drip-lightbox textarea {
+    display: block;
+    box-shadow: none;
+    position: relative;
+    border: 1px solid #cccccc;
+    outline: none;
+    border-radius: 3px;
+    font: inherit;
+    color: #262626;
+    padding: 12px 18px;
+    transition: border-color 300ms;
+    width: 100%;
+  }
+
+  .drip-lightbox .zenput--checkbox.hidden {
+    margin-bottom: -8px;
+    display: none;
+  }
+
+  .drip-lightbox .zenput--checkbox input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .drip-lightbox .zenput--checkbox input[type="checkbox"] ~ .zenput__checkbox-label {
+    font: inherit;
+    font-size: 16px;
+    line-height: 30px;
+    color: #262626;
+    cursor: pointer;
+    white-space: normal;
+    word-break: break-word;
+    display: block;
+    padding-left: 36px;
+    position: relative;
+    transition: color 300ms
+  }
+
+  .drip-lightbox .zenput--checkbox input[type="checkbox"] ~ .zenput__checkbox-label .zenput__checkbox-label__icon {
+    content: "";
+    display: block;
+    background: #f5f5f5;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 3px;
+    left: 0;
+    border-radius: 3px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+    padding: 3px;
+    transition: background 300ms ease-out, border-color 300ms;
+  }
+
+  .drip-lightbox .zenput--checkbox input[type="checkbox"] ~ .zenput__checkbox-label .zenput__checkbox-label__icon svg {
+    opacity: 0;
+    width: 16px;
+    display: block;
+    fill: #cccccc;
+    transition: opacity 300ms ease-out;
+  }
+
+  .drip-lightbox .zenput--checkbox .zenput__checkbox-label .zenput__checkbox-label__icon .octicon-dash {
+    display: none;
+  }
+
+  .drip-lightbox .zenput--checkbox input[type="checkbox"]:checked ~ .zenput__checkbox-label {
+    color: #333 !important;
+  }
+  .drip-lightbox .zenput--checkbox input[type="checkbox"]:checked ~ .zenput__checkbox-label .zenput__checkbox-label__icon {
+    background-color: #ffffff;
+    border-color: #a8acb9;
+  }
+  .drip-lightbox .zenput--checkbox input[type="checkbox"]:checked ~ .zenput__checkbox-label .zenput__checkbox-label__icon svg {
+    fill: #f9a82f !important;
+    opacity: 1;
+  }
+  /* stylelint-enable */
+
+</style><script src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/embed.js" data-timestamp="1567063467148"></script><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.c46a5b3df6acec9d5cde6bf8b61aaf6e.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.57d935b03ca64a8fc2ae95b8d550f132.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.10adfde1a6e883b828255fddc56fa508.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"><link rel="stylesheet" href="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/OneSignalSDKStyles.css"></head>
+<body class="" style="">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark flex-column" style="">
+<div class="container flex-row">
+<a class="navbar-brand" href="https://realpython.com/">
+<img src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/real-python-logo.ab1a167d9717.svg" height="40" class="d-inline-block align-top" alt="Real Python">
+</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav mr-2 flex-fill">
+<li class="nav-item">
+<a class="nav-link" href="https://realpython.com/start-here/">Start&nbsp;Here</a>
+</li>
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="https://realpython.com/python3-object-oriented-programming/#" id="navbarDropdownLibrary" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<span class="fa fa-graduation-cap"></span> Learn Python
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownLibrary">
+<a class="dropdown-item" href="https://realpython.com/">Python Tutorials</a>
+<a class="dropdown-item" href="https://realpython.com/courses/">Video Courses</a>
+<a class="dropdown-item" href="https://realpython.com/quizzes/">Interactive Quizzes</a>
+<a class="dropdown-item" href="https://realpython.com/learning-paths/">Learning Paths</a>
+<a class="dropdown-item" href="https://realpython.com/tutorials/all/">Browse Topics</a>
+<a class="dropdown-item border-top" href="https://realpython.com/account/join/"><i class="fa fa-fw fa-star text-warning"></i> Unlock All Content</a>
+</div>
+</li>
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="https://realpython.com/python3-object-oriented-programming/#" id="navbarDropdownBooksCourses" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Store
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownBooksCourses">
+<a class="dropdown-item" href="https://realpython.com/account/join/"><i class="fa fa-fw fa-star text-warning"></i> RP Membership</a>
+<a class="dropdown-item" href="https://realpython.com/products/python-basics-book/">Python Basics Book</a>
+<a class="dropdown-item" href="https://realpython.com/products/python-tricks-book/">Python Tricks Book</a>
+<a class="dropdown-item" href="https://realpython.com/products/real-python-course/">The Real Python Course</a>
+<a class="dropdown-item" href="https://realpython.com/products/managing-python-dependencies/">Managing Python Dependencies</a>
+<a class="dropdown-item" href="https://realpython.com/products/sublime-python/">Sublime Text + Python Setup</a>
+<a class="dropdown-item" href="https://realpython.com/products/pythonic-wallpapers/">Pythonic Wallpapers Pack</a>
+<a class="dropdown-item" href="https://nerdlettering.com/" target="_blank">Python Mugs, T-Shirts, and More</a>
+<a class="dropdown-item" href="https://www.pythonistacafe.com/" target="_blank">Pythonista Cafe Community</a>
+<a class="dropdown-item border-top" href="https://realpython.com/products/">Browse All »</a>
+</div>
+</li>
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="https://realpython.com/python3-object-oriented-programming/#" id="navbarDropdownMore" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+More
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMore">
+<a class="dropdown-item" href="https://realpython.com/newsletter/">Python Newsletter</a>
+<a class="dropdown-item" href="https://www.pythonjobshq.com/" target="_blank">Python Job Board</a>
+<a class="dropdown-item" href="https://realpython.com/team/">The Team</a>
+<a class="dropdown-item" href="https://realpython.com/write-for-us/">Write for Us</a>
+</div>
+</li>
+</ul>
+<form class="form-inline my-2 my-lg-0 mr-2 flex-fill" action="https://realpython.com/search" method="GET">
+<input class="search-field form-control form-control-md mr-sm-1 mr-lg-2 w-100" type="search" placeholder="Search…" aria-label="Search" name="q">
+</form>
+<ul class="navbar-nav">
+<li class="nav-item form-inline">
+<a class="btn btn-sm btn-primary px-3" href="https://realpython.com/account/join/">Join</a>
+</li>
+<li class="nav-item">
+<a class="btn text-light" href="https://realpython.com/account/login/">Sign&nbsp;In</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="container main-content">
+<div class="row justify-content-center">
+<div class="col-md-11 col-lg-8 article">
+<figure class="embed-responsive embed-responsive-16by9">
+<img class="card-img-top m-0 p-0 embed-responsive-item rounded" style="object-fit: contain;" alt="OOP in Python 3" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/Object-Oriented-Programming-OOP-in-Python-3_Watermarked.webp" width="1920" height="1080" srcset="https://robocrop.realpython.net/?url=https%3A//files.realpython.com/media/Object-Oriented-Programming-OOP-in-Python-3_Watermarked.0d29780806d5.jpg&amp;w=480&amp;sig=de2e7c1e545e53d220fc57dcf8c1c43906e6c997 480w, https://robocrop.realpython.net/?url=https%3A//files.realpython.com/media/Object-Oriented-Programming-OOP-in-Python-3_Watermarked.0d29780806d5.jpg&amp;w=960&amp;sig=b47969c1efe592512c6b037f04417bdc92e791d1 960w, https://files.realpython.com/media/Object-Oriented-Programming-OOP-in-Python-3_Watermarked.0d29780806d5.jpg 1920w" sizes="75vw">
+</figure>
+<h1>Object-Oriented Programming (OOP) in Python 3</h1>
+<p>
+<span class="text-muted">by <a class="text-muted" href="https://realpython.com/">Real Python</a>
+<span class="ml-2 mr-1 fa fa-comments"></span><a class="text-muted" href="https://realpython.com/python3-object-oriented-programming/#reader-comments"><span class="disqus-comment-count" data-disqus-identifier="https://realpython.com/python3-object-oriented-programming/">74 Comments</span></a>
+<span class="ml-2 fa fa-tags"></span>
+<a href="https://realpython.com/tutorials/intermediate/" class="badge badge-light text-muted">intermediate</a>
+<a href="https://realpython.com/tutorials/python/" class="badge badge-light text-muted">python</a>
+<br>
+<a target="_blank" rel="nofollow" href="https://twitter.com/intent/tweet/?text=Check%20out%20this%20%23Python%20tutorial:%20Object-Oriented%20Programming%20%28OOP%29%20in%20Python%203%20by%20@realpython&amp;url=https%3A//realpython.com/python3-object-oriented-programming/" class="mr-1 badge badge-twitter text-light"><i class="mr-1 fa fa-twitter text-light"></i>Tweet</a>
+<a target="_blank" rel="nofollow" href="https://facebook.com/sharer/sharer.php?u=https%3A//realpython.com/python3-object-oriented-programming/" class="mr-1 badge badge-facebook text-light"><i class="mr-1 fa fa-facebook text-light"></i>Share</a>
+<a target="_blank" rel="nofollow" href="mailto:?subject=Python%20article%20for%20you&amp;body=Check%20out%20this%20Python%20tutorial:%0A%0AObject-Oriented%20Programming%20%28OOP%29%20in%20Python%203%0A%0Ahttps%3A//realpython.com/python3-object-oriented-programming/" class="mr-1 badge badge-red text-light"><i class="mr-1 fa fa-envelope text-light"></i>Email</a>
+</span></p>
+<div class="article-body">
+<div class="bg-light sidebar-module sidebar-module-inset" id="toc">
+<p class="h3 mb-2 text-muted">Table of Contents</p>
+<div class="toc">
+<ul>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#what-is-object-oriented-programming-oop">What Is Object-Oriented Programming (OOP)?</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#classes-in-python">Classes in Python</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#python-objects-instances">Python Objects (Instances)</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#how-to-define-a-class-in-python">How To Define a Class in Python</a><ul>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#instance-attributes">Instance Attributes</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#class-attributes">Class Attributes</a></li>
+</ul>
+</li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#instantiating-objects">Instantiating Objects</a><ul>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#whats-going-on">What’s Going On?</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#review-exercises-1">Review Exercises (#1)</a></li>
+</ul>
+</li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#instance-methods">Instance Methods</a><ul>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#modifying-attributes">Modifying Attributes</a></li>
+</ul>
+</li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#python-object-inheritance">Python Object Inheritance</a><ul>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#dog-park-example">Dog Park Example</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#extending-the-functionality-of-a-parent-class">Extending the Functionality of a Parent Class</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#parent-vs-child-classes">Parent vs. Child Classes</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#overriding-the-functionality-of-a-parent-class">Overriding the Functionality of a Parent Class</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#review-exercises-2">Review Exercises (#2)</a></li>
+</ul>
+</li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#conclusion">Conclusion</a></li>
+</ul>
+</div>
+</div>
+<div class="sidebar-module sidebar-module-inset p-0" style="overflow:hidden;">
+<div style="display:block;position:relative;">
+<div style="display:block;width:100%;padding-top:12.5%;"></div>
+<div class="rpad" data-unit="8x1" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;"><a href="https://srv.realpython.net/click/3350257469/?c=14399513915&amp;p=58946116052&amp;r=77594" rel="nofollow" target="_blank"><img src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/07d79364b762870c23c56a9790ee8700" style="max-width: 100%; max-height: 100%; width: 100%;"></a></div>
+</div>
+</div>
+<div class="border rounded p-3 card mb-2">
+<p class="mb-0"><span class="badge badge-pill badge-success"><i class="fa fa-play-circle" aria-hidden="true"></i> Watch Now</span> This tutorial has a related video course created by the Real Python team. Watch it together with the written tutorial to deepen your understanding: <a class="stretched-link text-success" href="https://realpython.com/courses/intro-object-oriented-programming-oop-python/"><strong>Intro to Object-Oriented Programming (OOP) in Python</strong></a></p>
+</div>
+<p>In this article you’ll pick up the following basic concepts of OOP in Python:</p>
+<ul>
+<li>Python Classes</li>
+<li>Object Instances</li>
+<li>Defining and Working with Methods</li>
+<li>OOP Inheritance</li>
+</ul>
+<div class="alert alert-warning" role="alert"><p><strong>Free Bonus:</strong> <a href="https://realpython.com/python3-object-oriented-programming/#" class="alert-link" data-toggle="modal" data-target="#modal-python-oop" data-focus="false">Click here to get access to a free Python OOP Cheat Sheet</a> that points you to the best tutorials, videos, and books to learn more about Object-Oriented Programming with Python.</p></div>
+<div class="w-100 text-center js-needs-scaling" style="transform-origin: 0 0;"><div id="waldo-tag-4996" data-processed="true" style="display: none;"><script type="text/javascript">googletag.cmd.push(function() { googletag.display('waldo-tag-4996'); });</script><div id="google_ads_iframe_/124067137/realpython728x90FS_1_0__container__" style="border: 0pt none; width: 728px; height: 90px;"></div></div> <a class="small text-muted js-disclosure" href="https://realpython.com/account/join/" rel="nofollow" style="display: none;"> <i aria-hidden="true" class="fa fa-info-circle"> </i> Remove ads</a></div><h2 id="what-is-object-oriented-programming-oop">What Is Object-Oriented Programming (OOP)?</h2>
+<p>Object-oriented Programming, or <em>OOP</em> for short, is a <a href="http://en.wikipedia.org/wiki/Programming_paradigm">programming paradigm</a> which provides a means of structuring programs so that properties and behaviors are bundled into individual <em>objects</em>.</p>
+<p>For instance, an object could represent a person with a name property, age, address, etc., with behaviors like walking, talking, breathing, and running. Or an email with properties like recipient list, subject, body, etc., and behaviors like adding attachments and sending. </p>
+<p>Put another way, object-oriented programming is an approach for modeling concrete, real-world things like cars as well as relations between things like companies and employees, students and teachers, etc. OOP models real-world entities as software objects, which have some data associated with them and can perform certain functions.</p>
+<p>Another common programming paradigm is <em>procedural programming</em> which structures a program like a recipe in that it provides a set of steps, in the form of functions and code blocks, which flow sequentially in order to complete a task.</p>
+<p>The key takeaway is that objects are at the center of the object-oriented programming paradigm, not only representing the data, as in procedural programming, but in the overall structure of the program as well.</p>
+<blockquote>
+<p><strong>NOTE</strong>: Since Python is a multi-paradigm programming language, you can choose the paradigm that best suits the problem at hand, mix different paradigms in one program, and/or switch from one paradigm to another as your program evolves.</p>
+</blockquote>
+<h2 id="classes-in-python">Classes in Python</h2>
+<p>Focusing first on the data, each thing or object is an instance of some <em>class</em>.</p>
+<p>The primitive data structures available in Python, like numbers, strings, and lists are designed to represent simple things like the cost of something, the name of a poem, and your favorite colors, respectively. </p>
+<p>What if you wanted to represent something much more complicated? </p>
+<p>For example, let’s say you wanted to track a number of different animals. If you used a list, the first element could be the animal’s name while the second element could represent its age. </p>
+<p>How would you know which element is supposed to be which? What if you had 100 different animals? Are you certain each animal has both a name and an age, and so forth? What if you wanted to add other properties to these animals? This lacks organization, and it’s the exact need for <em>classes</em>.</p>
+<p>Classes are used to create new user-defined data structures that contain arbitrary information about something. In the case of an animal, we could create an <code>Animal()</code> class to track properties about the Animal like the name and age.</p>
+<p>It’s important to note that a class just provides structure—it’s a blueprint for how something should be defined, but it doesn’t actually provide any real content itself. The <code>Animal()</code> class may specify that the name and age are necessary for defining an animal, but it will not actually state what a specific animal’s name or age is.</p>
+<p>It may help to think of a class as an <em>idea</em> for how something should be defined.</p>
+<h2 id="python-objects-instances">Python Objects (Instances)</h2>
+<p>While the class is the blueprint, an <em>instance</em> is a copy of the class with <em>actual</em> values, literally an object belonging to a specific class. It’s not an idea anymore; it’s an actual animal, like a dog named Roger who’s eight years old.</p>
+<p>Put another way, a class is like a form or questionnaire. It defines the needed information. After you fill out the form, your specific copy is an instance of the class; it contains actual information relevant to you. </p>
+<p>You can fill out multiple copies to create many different instances, but without the form as a guide, you would be lost, not knowing what information is required. Thus, before you can create individual instances of an object, we must first specify what is needed by defining a class.</p>
+<h2 id="how-to-define-a-class-in-python">How To Define a Class in Python</h2>
+<p>Defining a class is simple in Python:</p>
+<div class="highlight python"><pre><span></span><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+<p>You start with the <code>class</code> keyword to indicate that you are creating a class, then you add the name of the class (using <a href="https://en.wikipedia.org/wiki/Camel_case">CamelCase notation</a>, starting with a capital letter.) </p>
+<p>Also, we used the Python keyword <code>pass</code> here. This is very often used as a place holder where code will eventually go. It allows us to run this code without throwing an error.</p>
+<blockquote>
+<p><strong>Note:</strong> The above code is correct on Python 3. On Python 2.x (“legacy Python”) you’d use a slightly different class definition:</p>
+<div class="highlight python"><pre><span></span><span class="c1"># Python 2.x Class Definition:</span>
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+<p>The <code>(object)</code> part in parentheses specifies the parent class that you are inheriting from (more on this below.) In Python 3 this is no longer necessary because it is the implicit default.</p>
+</blockquote>
+<h3 id="instance-attributes">Instance Attributes</h3>
+<p>All classes create objects, and all objects contain characteristics called attributes (referred to as properties in the opening paragraph). Use the <code>__init__()</code> method to initialize (e.g., specify) an object’s initial attributes by giving them their default value (or state). This method must have at least one argument as well as the <code>self</code> variable, which refers to the object itself (e.g., Dog).</p>
+<div class="highlight python"><pre><span></span><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+
+    <span class="c1"># Initializer / Instance Attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+</pre></div>
+<p>In the case of our <code>Dog()</code> class, each dog has a specific name and age, which is obviously important to know for when you start actually creating different dogs. Remember: the class is just for defining the Dog, not actually creating <em>instances</em> of individual dogs with specific names and ages; we’ll get to that shortly.</p>
+<p>Similarly, the <code>self</code> variable is also an instance of the class. Since instances of a class have varying values we could state <code>Dog.name = name</code> rather than <code>self.name = name</code>. But since not all dogs share the same name, we need to be able to assign different values to different instances. Hence the need for the special <code>self</code> variable, which will help to keep track of individual instances of each class.</p>
+<blockquote>
+<p><strong>NOTE</strong>: You will never have to call the <code>__init__()</code> method; it gets called automatically when you create a new ‘Dog’ instance.</p>
+</blockquote>
+<h3 id="class-attributes">Class Attributes</h3>
+<p>While instance attributes are specific to each object, class attributes are the same for all instances—which in this case is <em>all</em> dogs.</p>
+<div class="highlight python"><pre><span></span><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+
+    <span class="c1"># Class Attribute</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s1">'mammal'</span>
+
+    <span class="c1"># Initializer / Instance Attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+</pre></div>
+<p>So while each dog has a unique name and age, every dog will be a mammal.</p>
+<p>Let’s create some dogs…</p>
+<h2 id="instantiating-objects">Instantiating Objects</h2>
+<p>Instantiating is a fancy term for creating a new, unique instance of a class.</p>
+<p>For example:</p>
+<div class="highlight python repl"><span class="repl-toggle" title="Toggle REPL prompts and output">&gt;&gt;&gt;</span><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dog</span><span class="p">()</span>
+<span class="go">&lt;__main__.Dog object at 0x1004ccc50&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dog</span><span class="p">()</span>
+<span class="go">&lt;__main__.Dog object at 0x1004ccc90&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+<span class="go">False</span>
+</pre></div>
+<p>We started by defining a new <code>Dog()</code> class, then created two new dogs, each assigned to different objects. So, to create an instance of a class, you use the the class name, followed by parentheses. Then to demonstrate that each instance is actually different, we instantiated two more dogs, assigning each to a variable, then tested if those variables are equal.</p>
+<p>What do you think the type of a class instance is?</p>
+<div class="highlight python repl"><span class="repl-toggle" title="Toggle REPL prompts and output">&gt;&gt;&gt;</span><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">&lt;class '__main__.Dog'&gt;</span>
+</pre></div>
+<p>Let’s look at a slightly more complex example…</p>
+<div class="highlight python"><pre><span></span><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+
+    <span class="c1"># Class Attribute</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s1">'mammal'</span>
+
+    <span class="c1"># Initializer / Instance Attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+
+<span class="c1"># Instantiate the Dog object</span>
+<span class="n">philo</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s2">"Philo"</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">mikey</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s2">"Mikey"</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="c1"># Access the instance attributes</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2"> and </span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2">."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">philo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">philo</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">mikey</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">mikey</span><span class="o">.</span><span class="n">age</span><span class="p">))</span>
+
+<span class="c1"># Is Philo a mammal?</span>
+<span class="k">if</span> <span class="n">philo</span><span class="o">.</span><span class="n">species</span> <span class="o">==</span> <span class="s2">"mammal"</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">{0}</span><span class="s2"> is a </span><span class="si">{1}</span><span class="s2">!"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">philo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">philo</span><span class="o">.</span><span class="n">species</span><span class="p">))</span>
+</pre></div>
+<blockquote>
+<p><strong>NOTE</strong>: Notice how we use dot notation to access attributes from each object.</p>
+</blockquote>
+<p>Save this as <em>dog_class.py</em>, then run the program. You should see:</p>
+<div class="highlight"><pre><span></span>Philo is 5 and Mikey is 6.
+Philo is a mammal!
+</pre></div>
+<h3 id="whats-going-on">What’s Going On?</h3>
+<p>We created a new instance of the <code>Dog()</code> class and assigned it to the variable <code>philo</code>. We then passed it two arguments, <code>"Philo"</code> and <code>5</code>, which represent that dog’s name and age, respectively. </p>
+<p>These attributes are passed to the <code>__init__</code> method, which gets called any time you create a new instance, attaching the name and age to the object. You might be wondering why we didn’t have to pass in the <code>self</code> argument. </p>
+<p>This is Python magic; when you create a new instance of the class, Python automatically determines what <code>self</code> is (a Dog in this case) and passes it to the <code>__init__</code> method.</p>
+<h3 id="review-exercises-1">Review Exercises (#1)</h3>
+<div class="card mb-3" id="collapse_cardd52ca6">
+<div class="card-header border-0"><p class="m-0"><button class="btn" data-toggle="collapse" data-target="#collapsed52ca6" aria-expanded="false" aria-controls="collapsed52ca6">Exercise: "The Oldest Dog"</button> <button class="btn btn-link float-right" data-toggle="collapse" data-target="#collapsed52ca6" aria-expanded="false" aria-controls="collapsed52ca6">Show/Hide</button></p></div>
+<div id="collapsed52ca6" class="collapse" data-parent="#collapse_cardd52ca6"><div class="card-body" markdown="1">
+<p>Using the same <code>Dog</code> class, instantiate three new dogs, each with a different age. Then write a function called, <code>get_biggest_number()</code>, that takes any number of ages (<code>*args</code>) and returns the oldest one. Then output the age of the oldest dog like so:</p>
+<div class="highlight"><pre><span></span>The oldest dog is 7 years old.
+</pre></div>
+</div></div>
+</div>
+<div class="card mb-3" id="collapse_card20ce51">
+<div class="card-header border-0"><p class="m-0"><button class="btn" data-toggle="collapse" data-target="#collapse20ce51" aria-expanded="false" aria-controls="collapse20ce51">Solution: "The Oldest Dog"</button> <button class="btn btn-link float-right" data-toggle="collapse" data-target="#collapse20ce51" aria-expanded="false" aria-controls="collapse20ce51">Show/Hide</button></p></div>
+<div id="collapse20ce51" class="collapse" data-parent="#collapse_card20ce51"><div class="card-body" markdown="1">
+<div class="highlight python"><pre><span></span><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+
+    <span class="c1"># Class Attribute</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s1">'mammal'</span>
+
+    <span class="c1"># Initializer / Instance Attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+
+<span class="c1"># Instantiate the Dog object</span>
+<span class="n">jake</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s2">"Jake"</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">doug</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s2">"Doug"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">william</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s2">"William"</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+
+<span class="c1"># Determine the oldest dog</span>
+<span class="k">def</span> <span class="nf">get_biggest_number</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+
+<span class="c1"># Output</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The oldest dog is </span><span class="si">{}</span><span class="s2"> years old."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">get_biggest_number</span><span class="p">(</span><span class="n">jake</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">doug</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">william</span><span class="o">.</span><span class="n">age</span><span class="p">)))</span>
+</pre></div>
+</div></div>
+</div>
+<h2 id="instance-methods">Instance Methods</h2>
+<p>Instance methods are defined inside a class and are used to get the contents of an instance. They can also be used to perform operations with the attributes of our objects. Like the <code>__init__</code> method, the first argument is always <code>self</code>:</p>
+<div class="highlight python"><pre><span></span><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+
+    <span class="c1"># Class Attribute</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s1">'mammal'</span>
+
+    <span class="c1"># Initializer / Instance Attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="c1"># instance method</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2"> years old"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>
+
+    <span class="c1"># instance method</span>
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sound</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> says </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sound</span><span class="p">)</span>
+
+<span class="c1"># Instantiate the Dog object</span>
+<span class="n">mikey</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s2">"Mikey"</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="c1"># call our instance methods</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mikey</span><span class="o">.</span><span class="n">description</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mikey</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="s2">"Gruff Gruff"</span><span class="p">))</span>
+</pre></div>
+<p>Save this as <em>dog_instance_methods.py</em>, then run it:</p>
+<div class="highlight"><pre><span></span>Mikey is 6 years old
+Mikey says Gruff Gruff
+</pre></div>
+<p>In the latter method, <code>speak()</code>, we are defining behavior. What other behaviors could you assign to a dog? Look back to the beginning paragraph to see some example behaviors for other objects.</p>
+<h3 id="modifying-attributes">Modifying Attributes</h3>
+<p>You can change the value of attributes based on some behavior:</p>
+<div class="highlight python repl"><span class="repl-toggle" title="Toggle REPL prompts and output">&gt;&gt;&gt;</span><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Email</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">is_sent</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">send_email</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">is_sent</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_email</span> <span class="o">=</span> <span class="n">Email</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_email</span><span class="o">.</span><span class="n">is_sent</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_email</span><span class="o">.</span><span class="n">send_email</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_email</span><span class="o">.</span><span class="n">is_sent</span>
+<span class="go">True</span>
+</pre></div>
+<p>Here, we added a method to send an email, which updates the <code>is_sent</code> variable to <code>True</code>.</p>
+<h2 id="python-object-inheritance">Python Object Inheritance</h2>
+<p>Inheritance is the process by which one class takes on the attributes and methods of another. Newly formed classes are called <em>child classes</em>, and the classes that child classes are derived from are called <em>parent classes</em>. </p>
+<p>It’s important to note that child classes override <em>or</em> extend the functionality (e.g., attributes and behaviors) of parent classes. In other words, child classes inherit all of the parent’s attributes and behaviors but can also specify different behavior to follow. The most basic type of class is an <code>object</code>, which generally all other classes inherit as their parent.</p>
+<p>When you define a new class, Python 3 it implicitly uses <code>object</code> as the parent class. So the following two definitions are equivalent:</p>
+<div class="highlight python"><pre><span></span><span class="k">class</span> <span class="nc">Dog</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="c1"># In Python 3, this is the same as:</span>
+
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+<blockquote>
+<p><strong>Note:</strong> In Python 2.x there’s a distinction between <a href="https://wiki.python.org/moin/NewClassVsClassicClass"><em>new-style</em> and <em>old-style</em> classes</a>. I won’t go into detail here, but you’ll generally want to specify <code>object</code> as the parent class to ensure you’re definint a new-style class if you’re writing Python 2 OOP code.</p>
+</blockquote>
+<h3 id="dog-park-example">Dog Park Example</h3>
+<p>Let’s pretend that we’re at a dog park. There are multiple Dog objects engaging in Dog behaviors, each with different attributes. In regular-speak that means some dogs are running, while some are stretching and some are just watching other dogs. Furthermore, each dog has been named by its owner and, since each dog is living and breathing, each ages.</p>
+<p>What’s another way to differentiate one dog from another? How about the dog’s breed:</p>
+<div class="highlight python repl"><span class="repl-toggle" title="Toggle REPL prompts and output">&gt;&gt;&gt;</span><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">breed</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">breed</span> <span class="o">=</span> <span class="n">breed</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spencer</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s2">"German Shepard"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spencer</span><span class="o">.</span><span class="n">breed</span>
+<span class="go">'German Shepard'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sara</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s2">"Boston Terrier"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sara</span><span class="o">.</span><span class="n">breed</span>
+<span class="go">'Boston Terrier'</span>
+</pre></div>
+<p>Each breed of dog has slightly different behaviors. To take these into account, let’s create separate classes for each breed. These are child classes of the parent <code>Dog</code> class.</p>
+<h3 id="extending-the-functionality-of-a-parent-class">Extending the Functionality of a Parent Class</h3>
+<p>Create a new file called <em>dog_inheritance.py</em>:</p>
+<div class="highlight python"><pre><span></span><span class="c1"># Parent class</span>
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+
+    <span class="c1"># Class attribute</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s1">'mammal'</span>
+
+    <span class="c1"># Initializer / Instance attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="c1"># instance method</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2"> years old"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>
+
+    <span class="c1"># instance method</span>
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sound</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> says </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sound</span><span class="p">)</span>
+
+
+<span class="c1"># Child class (inherits from Dog class)</span>
+<span class="k">class</span> <span class="nc">RussellTerrier</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> runs </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+
+
+<span class="c1"># Child class (inherits from Dog class)</span>
+<span class="k">class</span> <span class="nc">Bulldog</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> runs </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+
+
+<span class="c1"># Child classes inherit attributes and</span>
+<span class="c1"># behaviors from the parent class</span>
+<span class="n">jim</span> <span class="o">=</span> <span class="n">Bulldog</span><span class="p">(</span><span class="s2">"Jim"</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jim</span><span class="o">.</span><span class="n">description</span><span class="p">())</span>
+
+<span class="c1"># Child classes have specific attributes</span>
+<span class="c1"># and behaviors as well</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">"slowly"</span><span class="p">))</span>
+</pre></div>
+<p>Read the comments aloud as you work through this program to help you understand what’s happening, then before you run the program, see if you can predict the expected output.</p>
+<p>You should see:</p>
+<div class="highlight"><pre><span></span>Jim is 12 years old
+Jim runs slowly
+</pre></div>
+<p>We haven’t added any special attributes or methods to differentiate a <code>RussellTerrier</code> from a <code>Bulldog</code>, but since they’re now two different classes, we could for instance give them different class attributes defining their respective speeds.</p>
+<h3 id="parent-vs-child-classes">Parent vs. Child Classes</h3>
+<p>The <code>isinstance()</code> function is used to determine if an instance is also an instance of a certain parent class.</p>
+<p>Save this as <em>dog_isinstance.py</em>:</p>
+<div class="highlight python"><pre><span></span><span class="c1"># Parent class</span>
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+
+    <span class="c1"># Class attribute</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s1">'mammal'</span>
+
+    <span class="c1"># Initializer / Instance attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="c1"># instance method</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2"> years old"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>
+
+    <span class="c1"># instance method</span>
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sound</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> says </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sound</span><span class="p">)</span>
+
+
+<span class="c1"># Child class (inherits from Dog() class)</span>
+<span class="k">class</span> <span class="nc">RussellTerrier</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> runs </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+
+
+<span class="c1"># Child class (inherits from Dog() class)</span>
+<span class="k">class</span> <span class="nc">Bulldog</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> runs </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+
+
+<span class="c1"># Child classes inherit attributes and</span>
+<span class="c1"># behaviors from the parent class</span>
+<span class="n">jim</span> <span class="o">=</span> <span class="n">Bulldog</span><span class="p">(</span><span class="s2">"Jim"</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jim</span><span class="o">.</span><span class="n">description</span><span class="p">())</span>
+
+<span class="c1"># Child classes have specific attributes</span>
+<span class="c1"># and behaviors as well</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">"slowly"</span><span class="p">))</span>
+
+<span class="c1"># Is jim an instance of Dog()?</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">jim</span><span class="p">,</span> <span class="n">Dog</span><span class="p">))</span>
+
+<span class="c1"># Is julie an instance of Dog()?</span>
+<span class="n">julie</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s2">"Julie"</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">julie</span><span class="p">,</span> <span class="n">Dog</span><span class="p">))</span>
+
+<span class="c1"># Is johnny walker an instance of Bulldog()</span>
+<span class="n">johnnywalker</span> <span class="o">=</span> <span class="n">RussellTerrier</span><span class="p">(</span><span class="s2">"Johnny Walker"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">johnnywalker</span><span class="p">,</span> <span class="n">Bulldog</span><span class="p">))</span>
+
+<span class="c1"># Is julie and instance of jim?</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">julie</span><span class="p">,</span> <span class="n">jim</span><span class="p">))</span>
+</pre></div>
+<p>Output:</p>
+<div class="highlight python repl"><span class="repl-toggle" title="Toggle REPL prompts and output">&gt;&gt;&gt;</span><pre><span></span><span class="go">('Jim', 12)</span>
+<span class="go">Jim runs slowly</span>
+<span class="go">True</span>
+<span class="go">True</span>
+<span class="go">False</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">"dog_isinstance.py"</span>, line <span class="m">50</span>, in <span class="n">&lt;module&gt;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">julie</span><span class="p">,</span> <span class="n">jim</span><span class="p">))</span>
+<span class="gr">TypeError</span>: <span class="n">isinstance() arg 2 must be a class, type, or tuple of classes and types</span>
+</pre></div>
+<p>Make sense? Both <code>jim</code> and <code>julie</code> are instances of the <code>Dog()</code> class, while <code>johnnywalker</code> is not an instance of the <code>Bulldog()</code> class. Then as a sanity check, we tested if <code>julie</code> is an instance of <code>jim</code>, which is impossible since <code>jim</code> is an <code>instance</code> of a class rather than a class itself—hence the reason for the <code>TypeError</code>.</p>
+<h3 id="overriding-the-functionality-of-a-parent-class">Overriding the Functionality of a Parent Class</h3>
+<p>Remember that child classes can also override attributes and behaviors from the parent class. For examples:</p>
+<div class="highlight python repl"><span class="repl-toggle" title="Toggle REPL prompts and output">&gt;&gt;&gt;</span><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">species</span> <span class="o">=</span> <span class="s1">'mammal'</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">SomeBreed</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">SomeOtherBreed</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">species</span> <span class="o">=</span> <span class="s1">'reptile'</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frank</span> <span class="o">=</span> <span class="n">SomeBreed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frank</span><span class="o">.</span><span class="n">species</span>
+<span class="go">'mammal'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beans</span> <span class="o">=</span> <span class="n">SomeOtherBreed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beans</span><span class="o">.</span><span class="n">species</span>
+<span class="go">'reptile'</span>
+</pre></div>
+<p>The <code>SomeBreed()</code> class inherits the <code>species</code> from the parent class, while the <code>SomeOtherBreed()</code> class overrides the <code>species</code>, setting it to <code>reptile</code>.</p>
+<h3 id="review-exercises-2">Review Exercises (#2)</h3>
+<div class="card mb-3" id="collapse_card64c5cd">
+<div class="card-header border-0"><p class="m-0"><button class="btn" data-toggle="collapse" data-target="#collapse64c5cd" aria-expanded="false" aria-controls="collapse64c5cd">Exercise: "Dog Inheritance"</button> <button class="btn btn-link float-right" data-toggle="collapse" data-target="#collapse64c5cd" aria-expanded="false" aria-controls="collapse64c5cd">Show/Hide</button></p></div>
+<div id="collapse64c5cd" class="collapse" data-parent="#collapse_card64c5cd"><div class="card-body" markdown="1">
+<p>Create a <code>Pets</code> class that holds instances of dogs; this class is completely separate from the <code>Dog</code> class. In other words, the <code>Dog</code> class does not inherit from the <code>Pets</code> class. Then assign three dog instances to an instance of the <code>Pets</code> class. Start with the following code below. Save the file as <em>pets_class.py</em>. Your output should look like this:</p>
+<div class="highlight"><pre><span></span>I have 3 dogs. 
+Tom is 6. 
+Fletcher is 7. 
+Larry is 9. 
+And they're all mammals, of course.
+</pre></div>
+<p>Starter code:</p>
+<div class="highlight python"><pre><span></span><span class="c1"># Parent class</span>
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+
+    <span class="c1"># Class attribute</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s1">'mammal'</span>
+
+    <span class="c1"># Initializer / Instance attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="c1"># instance method</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2"> years old"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>
+
+    <span class="c1"># instance method</span>
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sound</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> says </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sound</span><span class="p">)</span>
+
+<span class="c1"># Child class (inherits from Dog class)</span>
+<span class="k">class</span> <span class="nc">RussellTerrier</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> runs </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+
+<span class="c1"># Child class (inherits from Dog class)</span>
+<span class="k">class</span> <span class="nc">Bulldog</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> runs </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+</pre></div>
+</div></div>
+</div>
+<div class="card mb-3" id="collapse_card504e07">
+<div class="card-header border-0"><p class="m-0"><button class="btn" data-toggle="collapse" data-target="#collapse504e07" aria-expanded="false" aria-controls="collapse504e07">Solution: "Dog Inheritance"</button> <button class="btn btn-link float-right" data-toggle="collapse" data-target="#collapse504e07" aria-expanded="false" aria-controls="collapse504e07">Show/Hide</button></p></div>
+<div id="collapse504e07" class="collapse" data-parent="#collapse_card504e07"><div class="card-body" markdown="1">
+<div class="highlight python"><pre><span></span><span class="c1"># Parent class</span>
+<span class="k">class</span> <span class="nc">Pets</span><span class="p">:</span>
+
+    <span class="n">dogs</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dogs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dogs</span> <span class="o">=</span> <span class="n">dogs</span>
+
+
+<span class="c1"># Parent class</span>
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+
+    <span class="c1"># Class attribute</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s1">'mammal'</span>
+
+    <span class="c1"># Initializer / Instance attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="c1"># Instance method</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span>
+
+    <span class="c1"># Instance method</span>
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sound</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">%s</span><span class="s2"> says </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sound</span><span class="p">)</span>
+
+    <span class="c1"># Instance method</span>
+    <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_hungry</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="c1"># Child class (inherits from Dog class)</span>
+<span class="k">class</span> <span class="nc">RussellTerrier</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">%s</span><span class="s2"> runs </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+
+
+<span class="c1"># Child class (inherits from Dog class)</span>
+<span class="k">class</span> <span class="nc">Bulldog</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">%s</span><span class="s2"> runs </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+
+<span class="c1"># Create instances of dogs</span>
+<span class="n">my_dogs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Bulldog</span><span class="p">(</span><span class="s2">"Tom"</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> 
+    <span class="n">RussellTerrier</span><span class="p">(</span><span class="s2">"Fletcher"</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> 
+    <span class="n">Dog</span><span class="p">(</span><span class="s2">"Larry"</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># Instantiate the Pets class</span>
+<span class="n">my_pets</span> <span class="o">=</span> <span class="n">Pets</span><span class="p">(</span><span class="n">my_dogs</span><span class="p">)</span>
+
+<span class="c1"># Output</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"I have </span><span class="si">{}</span><span class="s2"> dogs."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">my_pets</span><span class="o">.</span><span class="n">dogs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">dog</span> <span class="ow">in</span> <span class="n">my_pets</span><span class="o">.</span><span class="n">dogs</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2">."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dog</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">dog</span><span class="o">.</span><span class="n">age</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"And they're all </span><span class="si">{}</span><span class="s2">s, of course."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dog</span><span class="o">.</span><span class="n">species</span><span class="p">))</span>
+</pre></div>
+</div></div>
+</div>
+<div class="card mb-3" id="collapse_card961ea3">
+<div class="card-header border-0"><p class="m-0"><button class="btn" data-toggle="collapse" data-target="#collapse961ea3" aria-expanded="false" aria-controls="collapse961ea3">Exercise: "Hungry Dogs"</button> <button class="btn btn-link float-right" data-toggle="collapse" data-target="#collapse961ea3" aria-expanded="false" aria-controls="collapse961ea3">Show/Hide</button></p></div>
+<div id="collapse961ea3" class="collapse" data-parent="#collapse_card961ea3"><div class="card-body" markdown="1">
+<p>Using the same file, add an instance attribute of <code>is_hungry = True</code> to the <code>Dog</code> class. Then add a method called <code>eat()</code> which changes the value of <code>is_hungry</code> to <code>False</code> when called. Figure out the best way to feed each dog and then output “My dogs are hungry.” if all are hungry or “My dogs are not hungry.” if all are not hungry. The final output should look like this:</p>
+<div class="highlight"><pre><span></span>I have 3 dogs. 
+Tom is 6. 
+Fletcher is 7. 
+Larry is 9. 
+And they're all mammals, of course. 
+My dogs are not hungry.
+</pre></div>
+</div></div>
+</div>
+<div class="card mb-3" id="collapse_carded06a9">
+<div class="card-header border-0"><p class="m-0"><button class="btn" data-toggle="collapse" data-target="#collapseed06a9" aria-expanded="false" aria-controls="collapseed06a9">Solution: "Hungry Dogs"</button> <button class="btn btn-link float-right" data-toggle="collapse" data-target="#collapseed06a9" aria-expanded="false" aria-controls="collapseed06a9">Show/Hide</button></p></div>
+<div id="collapseed06a9" class="collapse" data-parent="#collapse_carded06a9"><div class="card-body" markdown="1">
+<div class="highlight python"><pre><span></span><span class="c1"># Parent class</span>
+<span class="k">class</span> <span class="nc">Pets</span><span class="p">:</span>
+
+    <span class="n">dogs</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dogs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dogs</span> <span class="o">=</span> <span class="n">dogs</span>
+
+
+<span class="c1"># Parent class</span>
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+
+    <span class="c1"># Class attribute</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s1">'mammal'</span>
+
+    <span class="c1"># Initializer / Instance attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_hungry</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># Instance method</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span>
+
+    <span class="c1"># Instance method</span>
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sound</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">%s</span><span class="s2"> says </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sound</span><span class="p">)</span>
+
+    <span class="c1"># Instance method</span>
+    <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_hungry</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="c1"># Child class (inherits from Dog class)</span>
+<span class="k">class</span> <span class="nc">RussellTerrier</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">%s</span><span class="s2"> runs </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+
+
+<span class="c1"># Child class (inherits from Dog class)</span>
+<span class="k">class</span> <span class="nc">Bulldog</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">%s</span><span class="s2"> runs </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+
+<span class="c1"># Create instances of dogs</span>
+<span class="n">my_dogs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Bulldog</span><span class="p">(</span><span class="s2">"Tom"</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> 
+    <span class="n">RussellTerrier</span><span class="p">(</span><span class="s2">"Fletcher"</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> 
+    <span class="n">Dog</span><span class="p">(</span><span class="s2">"Larry"</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># Instantiate the Pets class</span>
+<span class="n">my_pets</span> <span class="o">=</span> <span class="n">Pets</span><span class="p">(</span><span class="n">my_dogs</span><span class="p">)</span>
+
+<span class="c1"># Output</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"I have </span><span class="si">{}</span><span class="s2"> dogs."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">my_pets</span><span class="o">.</span><span class="n">dogs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">dog</span> <span class="ow">in</span> <span class="n">my_pets</span><span class="o">.</span><span class="n">dogs</span><span class="p">:</span>
+    <span class="n">dog</span><span class="o">.</span><span class="n">eat</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2">."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dog</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">dog</span><span class="o">.</span><span class="n">age</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"And they're all </span><span class="si">{}</span><span class="s2">s, of course."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dog</span><span class="o">.</span><span class="n">species</span><span class="p">))</span>
+
+<span class="n">are_my_dogs_hungry</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">for</span> <span class="n">dog</span> <span class="ow">in</span> <span class="n">my_pets</span><span class="o">.</span><span class="n">dogs</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">dog</span><span class="o">.</span><span class="n">is_hungry</span><span class="p">:</span>
+        <span class="n">are_my_dogs_hungry</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="k">if</span> <span class="n">are_my_dogs_hungry</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"My dogs are hungry."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"My dogs are not hungry."</span><span class="p">)</span>
+</pre></div>
+</div></div>
+</div>
+<div class="card mb-3" id="collapse_carda7bc80">
+<div class="card-header border-0"><p class="m-0"><button class="btn" data-toggle="collapse" data-target="#collapsea7bc80" aria-expanded="false" aria-controls="collapsea7bc80">Exercise: "Dog Walking"</button> <button class="btn btn-link float-right" data-toggle="collapse" data-target="#collapsea7bc80" aria-expanded="false" aria-controls="collapsea7bc80">Show/Hide</button></p></div>
+<div id="collapsea7bc80" class="collapse" data-parent="#collapse_carda7bc80"><div class="card-body" markdown="1">
+<p>Next, add a <code>walk()</code> method to both the <code>Pets</code> and <code>Dog</code> classes so that when you call the method on the <code>Pets</code> class, each dog instance assigned to the <code>Pets</code> class will <code>walk()</code>. Save this as <em>dog_walking.py</em>. This is slightly more difficult. </p>
+<p>Start by implementing the method in the same manner as the <code>speak()</code> method. As for the method in the <code>Pets</code> class, you will need to iterate through the list of dogs, then call the method itself.</p>
+<p>The output should look like this:</p>
+<div class="highlight"><pre><span></span>Tom is walking!
+Fletcher is walking!
+Larry is walking!
+</pre></div>
+</div></div>
+</div>
+<div class="card mb-3" id="collapse_cardffad3a">
+<div class="card-header border-0"><p class="m-0"><button class="btn" data-toggle="collapse" data-target="#collapseffad3a" aria-expanded="false" aria-controls="collapseffad3a">Solution: "Dog Walking"</button> <button class="btn btn-link float-right" data-toggle="collapse" data-target="#collapseffad3a" aria-expanded="false" aria-controls="collapseffad3a">Show/Hide</button></p></div>
+<div id="collapseffad3a" class="collapse" data-parent="#collapse_cardffad3a"><div class="card-body" markdown="1">
+<div class="highlight python"><pre><span></span><span class="c1"># Parent class</span>
+<span class="k">class</span> <span class="nc">Pets</span><span class="p">:</span>
+
+    <span class="n">dogs</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dogs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dogs</span> <span class="o">=</span> <span class="n">dogs</span>
+
+    <span class="k">def</span> <span class="nf">walk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">dog</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dogs</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">dog</span><span class="o">.</span><span class="n">walk</span><span class="p">())</span>
+
+
+<span class="c1"># Parent class</span>
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+
+    <span class="c1"># Class attribute</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s1">'mammal'</span>
+    <span class="n">is_hungry</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># Initializer / instance attributes</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="c1"># Instance method</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span>
+
+    <span class="c1"># Instance method</span>
+    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sound</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">%s</span><span class="s2"> says </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sound</span><span class="p">)</span>
+
+    <span class="c1"># Instance method</span>
+    <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_hungry</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">walk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">%s</span><span class="s2"> is walking!"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+
+<span class="c1"># Child class (inherits from Dog class)</span>
+<span class="k">class</span> <span class="nc">RussellTerrier</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">%s</span><span class="s2"> runs </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+
+
+<span class="c1"># Child class (inherits from Dog class)</span>
+<span class="k">class</span> <span class="nc">Bulldog</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">%s</span><span class="s2"> runs </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+
+<span class="c1"># Create instances of dogs</span>
+<span class="n">my_dogs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Bulldog</span><span class="p">(</span><span class="s2">"Tom"</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> 
+    <span class="n">RussellTerrier</span><span class="p">(</span><span class="s2">"Fletcher"</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> 
+    <span class="n">Dog</span><span class="p">(</span><span class="s2">"Larry"</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># Instantiate the Pet class</span>
+<span class="n">my_pets</span> <span class="o">=</span> <span class="n">Pets</span><span class="p">(</span><span class="n">my_dogs</span><span class="p">)</span>
+
+<span class="c1"># Output</span>
+<span class="n">my_pets</span><span class="o">.</span><span class="n">walk</span><span class="p">()</span>
+</pre></div>
+</div></div>
+</div>
+<div class="card mb-3" id="collapse_card90907f">
+<div class="card-header border-0"><p class="m-0"><button class="btn" data-toggle="collapse" data-target="#collapse90907f" aria-expanded="false" aria-controls="collapse90907f">Exercise: "Comprehension Check"</button> <button class="btn btn-link float-right" data-toggle="collapse" data-target="#collapse90907f" aria-expanded="false" aria-controls="collapse90907f">Show/Hide</button></p></div>
+<div id="collapse90907f" class="collapse" data-parent="#collapse_card90907f"><div class="card-body" markdown="1">
+<p>Answer the following questions about OOP to check your learning progress:</p>
+<ol>
+<li>What’s a class?</li>
+<li>What’s an instance?</li>
+<li>What’s the relationship between a class and an instance?</li>
+<li>What’s the Python syntax used for defining a new class?</li>
+<li>What’s the spelling convention for a class name?</li>
+<li>How do you instantiate, or create an instance of, a class?</li>
+<li>How do you access the attributes and behaviors of a class instance?</li>
+<li>What’s a method?</li>
+<li>What’s the purpose of <code>self</code>?</li>
+<li>What’s the purpose of the <code>__init__</code> method?</li>
+<li>Describe how inheritance helps prevent code duplication.</li>
+<li>Can child classes override properties of their parents?</li>
+</ol>
+</div></div>
+</div>
+<div class="card mb-3" id="collapse_cardf1de6d">
+<div class="card-header border-0"><p class="m-0"><button class="btn" data-toggle="collapse" data-target="#collapsef1de6d" aria-expanded="false" aria-controls="collapsef1de6d">Solution: "Comprehension Check"</button> <button class="btn btn-link float-right" data-toggle="collapse" data-target="#collapsef1de6d" aria-expanded="false" aria-controls="collapsef1de6d">Show/Hide</button></p></div>
+<div id="collapsef1de6d" class="collapse" data-parent="#collapse_cardf1de6d"><div class="card-body" markdown="1">
+<ol>
+<li>A class is a mechanism used to create new user-defined data structures. It contains data as well as the methods used to process that data.</li>
+<li>An instance is a copy of the class with <em>actual</em> values, literally an object of a specific class. </li>
+<li>While a class is a blueprint used to describe how to make something, instances are objects created from those blueprints.</li>
+<li><code>class PythonClassName:</code></li>
+<li>CamelCase notation, starting with a capital letter - i.e., <code>PythonClassName()</code></li>
+<li>You use the the class name, followed by parentheses. So if the class name is <code>Dog()</code>, an dog instance would be - <code>my_class = Dog()</code>.</li>
+<li>With dot notation - e.g., <code>instance_name.attribute_name</code></li>
+<li>A function that’s defined inside a class.</li>
+<li>The first argument of every method references the current instance of the class, which by convention, is named <code>self</code>. In the <code>__init__</code> method, <code>self</code> refers to the newly created object; while in other methods, <code>self</code> refers to the instance whose method was called. For more on <code>__init__</code> vs. <code>self</code>, check out <a href="http://stackoverflow.com/a/625098">this</a> article.</li>
+<li>The <code>__init__</code> method initializes an instance of a class. </li>
+<li>Child classes inherit all of the parent’s attributes and behaviors. </li>
+<li>Yes.</li>
+</ol>
+</div></div>
+</div>
+<div class="w-100 text-center js-needs-scaling" style="transform-origin: 0 0;"><div id="waldo-tag-4998" data-processed="true" style="display: none;"><script type="text/javascript">googletag.cmd.push(function() { googletag.display('waldo-tag-4998'); });</script><div id="google_ads_iframe_/124067137/realpython728x90FS_2_0__container__" style="border: 0pt none; width: 728px; height: 90px;"></div></div> <a class="small text-muted js-disclosure" href="https://realpython.com/account/join/" rel="nofollow" style="display: none;"> <i aria-hidden="true" class="fa fa-info-circle"> </i> Remove ads</a></div><h2 id="conclusion">Conclusion</h2>
+<p>You should now know what classes are, why you would want or need to use them, and how to create both parent and child classes to better structure your programs.</p>
+<p>Please be aware that OOP is a programming paradigm and not a Python concept. Most of the modern programming languages such as Java, C#, C++ follow OOP principles. So the good news is that learning object-oriented programming fundamentals will be valuable to you in a variety of circumstances—whether you’re working in Python or not.</p>
+<p>For further explanation of objected-oriented programming in Python, we recommend that you consult these additional resources:</p>
+<div class="alert alert-warning" role="alert"><p><strong>Free Bonus:</strong> <a href="https://realpython.com/python3-object-oriented-programming/#" class="alert-link" data-toggle="modal" data-target="#modal-python-oop" data-focus="false">Click here to get access to a free Python OOP Cheat Sheet</a> that points you to the best tutorials, videos, and books to learn more about Object-Oriented Programming with Python.</p></div>
+<div class="border rounded p-3 card mb-2">
+<p class="mb-0"><span class="badge badge-pill badge-success"><i class="fa fa-play-circle" aria-hidden="true"></i> Watch Now</span> This tutorial has a related video course created by the Real Python team. Watch it together with the written tutorial to deepen your understanding: <a class="stretched-link text-success" href="https://realpython.com/courses/intro-object-oriented-programming-oop-python/"><strong>Intro to Object-Oriented Programming (OOP) in Python</strong></a></p>
+</div>
+</div>
+<div class="card mt-4 mb-4 bg-secondary">
+<p class="card-header h3 text-center bg-light">🐍 Python Tricks 💌</p>
+<div class="card-body">
+<div class="container">
+<div class="row">
+<div class="col-xs-12 col-sm-7">
+<p>Get a short &amp; sweet <strong>Python Trick</strong> delivered to your inbox every couple of days. No spam ever. Unsubscribe any time. Curated by the Real Python team.</p>
+</div>
+<div class="col-xs-12 col-sm-5">
+<img class="img-fluid rounded mb-3" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/pytrick-dict-merge.webp" width="738" height="490" alt="Python Tricks Dictionary Merge">
+</div>
+</div>
+<div class="row mb-3">
+<form class="col-12" action="https://realpython.com/optins/process/" method="post">
+<input type="hidden" name="csrfmiddlewaretoken" value="ZAtp4pOfCqI03hx1X4qc3KGXNydF6sK8kj3zM4iKnWaXZ8b9u6bG1aovoojztamr">
+<input type="hidden" name="slug" value="static-python-tricks-footer">
+ <div class="form-group">
+<input name="email" type="email" class="form-control form-control-lg" placeholder="Email Address" required="">
+</div>
+<button name="submit" type="submit" class="btn btn-primary btn-lg btn-block">Send Me Python Tricks »</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar-module sidebar-module-inset p-0 my-4" style="overflow:hidden;">
+<div style="display:block;position:relative;">
+<div style="display:block;width:100%;padding-top:25%;"></div>
+<div class="rpad" data-unit="4x1" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;"><a href="https://srv.realpython.net/click/2933810937/?c=37384875857&amp;p=58946116052&amp;r=76485" rel="nofollow" target="_blank"><img src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/6346943f3628398cb60e28a63f9de9c0" style="max-width: 100%; max-height: 100%; width: 100%;"></a></div>
+</div>
+</div>
+<div class="card mt-4" id="reader-comments">
+<p class="card-header h3">What Do You Think?</p>
+<div class="text-center mt-3 mb-0 p-0">
+<a target="_blank" rel="nofollow" href="https://twitter.com/intent/tweet/?text=Check%20out%20this%20%23Python%20tutorial:%20Object-Oriented%20Programming%20%28OOP%29%20in%20Python%203%20by%20@realpython&amp;url=https%3A//realpython.com/python3-object-oriented-programming/" class="mr-1 badge badge-twitter text-light"><i class="mr-1 fa fa-twitter text-light"></i>Tweet</a>
+<a target="_blank" rel="nofollow" href="https://facebook.com/sharer/sharer.php?u=https%3A//realpython.com/python3-object-oriented-programming/" class="mr-1 badge badge-facebook text-light"><i class="mr-1 fa fa-facebook text-light"></i>Share</a>
+<a target="_blank" rel="nofollow" href="mailto:?subject=Python%20article%20for%20you&amp;body=Check%20out%20this%20Python%20tutorial:%0A%0AObject-Oriented%20Programming%20%28OOP%29%20in%20Python%203%0A%0Ahttps%3A//realpython.com/python3-object-oriented-programming/" class="mr-1 badge badge-red text-light"><i class="mr-1 fa fa-envelope text-light"></i>Email</a>
+</div>
+<div class="card-body">
+<div class="alert alert-dark">
+<p class="mb-0"><strong>Real Python Comment Policy:</strong> The most useful comments are those written with the goal of learning from or helping out other readers—after reading the whole article and all the earlier comments. Complaints and insults generally won’t make the cut here.</p>
+</div>
+<div class="mb-4" id="disqus_thread"><iframe id="dsq-app6153" name="dsq-app6153" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/saved_resource.html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 9923px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+</div>
+</div>
+<div class="card mt-4 mb-4">
+<p class="card-header h3">Keep Learning</p>
+<div class="card-body">
+<p class="mb-0">Related Tutorial Categories:
+<a href="https://realpython.com/tutorials/intermediate/" class="badge badge-light text-muted">intermediate</a>
+<a href="https://realpython.com/tutorials/python/" class="badge badge-light text-muted">python</a>
+</p>
+<p class="mt-3 mb-0">Recommended Video Course: <a class="text-success" href="https://realpython.com/courses/intro-object-oriented-programming-oop-python/">Intro to Object-Oriented Programming (OOP) in Python</a></p>
+</div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="rpvc" style="display: none;" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+<div class="modal-content">
+<div class="modal-header border-0 mt-3">
+<div class="col-12 modal-title text-center">
+<h2 class="my-0 mx-5">Master <u>Real-World Python Skills</u> With Unlimited Access to Real Python</h2>
+<p class="text-center text-muted mt-2 mb-1">Already a member? <a href="https://realpython.com/account/login/">Log In</a></p>
+</div>
+</div>
+<div class="modal-body bg-light">
+<div class="col-12 text-center">
+<p class="mb-2 mt-3"><a href="https://realpython.com/account/join/?utm_source=rp&amp;utm_medium=web&amp;utm_campaign=pwn&amp;utm_content=v1"><img class="w-50 mb-2" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/lesson-locked.f5105cfd26db.svg"></a></p>
+<p class="mx-auto w-66 mb-3"><strong>Join us and get access to hundreds of tutorials, hands-on video courses, and a community of expert Pythonistas:</strong></p>
+<p><a href="https://realpython.com/account/join/?utm_source=rp&amp;utm_medium=web&amp;utm_campaign=pwn&amp;utm_content=v1" class="btn btn-primary btn-lg px-4">See Membership Options »</a>
+</p></div>
+ </div>
+<div class="modal-footer border-0">
+<a href="https://realpython.com/python3-object-oriented-programming/#!" class="text-muted btn" data-dismiss="modal">Close</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<aside class="col-md-7 col-lg-4">
+<div class="card mb-3 bg-secondary">
+<form class="card-body" action="https://realpython.com/optins/process/" method="post">
+<div class="form-group">
+<p class="h5 text-muted text-center">— FREE Email Series —</p>
+<p class="h3 text-center">🐍 Python Tricks 💌</p>
+<p><img class="img-fluid rounded" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/pytrick-dict-merge.webp" width="738" height="490" alt="Python Tricks Dictionary Merge"></p>
+</div>
+<div class="form-group">
+<input type="hidden" name="csrfmiddlewaretoken" value="ZAtp4pOfCqI03hx1X4qc3KGXNydF6sK8kj3zM4iKnWaXZ8b9u6bG1aovoojztamr">
+<input type="hidden" name="slug" value="static-python-tricks-sidebar">
+<input type="email" class="form-control form-control-md" name="email" placeholder="Email…" required="">
+</div>
+<button type="submit" name="submit" class="btn btn-primary btn-md btn-block">Get Python Tricks »</button>
+<p class="mb-0 mt-2 text-muted text-center">🔒 No spam. Unsubscribe any time.</p>
+</form>
+</div>
+<div class="sidebar-module sidebar-module-inset border">
+<p class="h4"><a class="link-unstyled" href="https://realpython.com/tutorials/all/">All Tutorial Topics</a></p>
+<a href="https://realpython.com/tutorials/advanced/" class="badge badge-light text-muted">advanced</a>
+<a href="https://realpython.com/tutorials/api/" class="badge badge-light text-muted">api</a>
+<a href="https://realpython.com/tutorials/basics/" class="badge badge-light text-muted">basics</a>
+<a href="https://realpython.com/tutorials/best-practices/" class="badge badge-light text-muted">best-practices</a>
+<a href="https://realpython.com/tutorials/community/" class="badge badge-light text-muted">community</a>
+<a href="https://realpython.com/tutorials/databases/" class="badge badge-light text-muted">databases</a>
+<a href="https://realpython.com/tutorials/data-science/" class="badge badge-light text-muted">data-science</a>
+<a href="https://realpython.com/tutorials/devops/" class="badge badge-light text-muted">devops</a>
+<a href="https://realpython.com/tutorials/django/" class="badge badge-light text-muted">django</a>
+<a href="https://realpython.com/tutorials/docker/" class="badge badge-light text-muted">docker</a>
+<a href="https://realpython.com/tutorials/flask/" class="badge badge-light text-muted">flask</a>
+<a href="https://realpython.com/tutorials/front-end/" class="badge badge-light text-muted">front-end</a>
+<a href="https://realpython.com/tutorials/intermediate/" class="badge badge-light text-muted">intermediate</a>
+<a href="https://realpython.com/tutorials/machine-learning/" class="badge badge-light text-muted">machine-learning</a>
+<a href="https://realpython.com/tutorials/python/" class="badge badge-light text-muted">python</a>
+<a href="https://realpython.com/tutorials/testing/" class="badge badge-light text-muted">testing</a>
+<a href="https://realpython.com/tutorials/tools/" class="badge badge-light text-muted">tools</a>
+<a href="https://realpython.com/tutorials/web-dev/" class="badge badge-light text-muted">web-dev</a>
+<a href="https://realpython.com/tutorials/web-scraping/" class="badge badge-light text-muted">web-scraping</a>
+</div>
+<div class="sidebar-module sidebar-module-inset p-0" style="overflow:hidden;">
+<div style="display:block;position:relative;">
+<div style="display:block;width:100%;padding-top:100%;"></div>
+<div class="rpad" data-unit="1x1" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;"><a href="https://srv.realpython.net/click/8159475462/?c=14399513915&amp;p=58946116052&amp;r=50909" rel="nofollow" target="_blank"><img src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/45d52424e3b5d2f3a15379a091756bfc" style="max-width: 100%; max-height: 100%; width: 100%;"></a></div>
+</div>
+</div>
+<div class="sidebar-sticky">
+<div class="sidebar-module sidebar-module-inset border">
+<p class="h4"><a class="link-unstyled" href="https://realpython.com/python3-object-oriented-programming/#toc">Table of Contents</a></p>
+<div class="toc">
+<ul>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#what-is-object-oriented-programming-oop">What Is Object-Oriented Programming (OOP)?</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#classes-in-python">Classes in Python</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#python-objects-instances">Python Objects (Instances)</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#how-to-define-a-class-in-python">How To Define a Class in Python</a><ul>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#instance-attributes">Instance Attributes</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#class-attributes">Class Attributes</a></li>
+</ul>
+</li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#instantiating-objects">Instantiating Objects</a><ul>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#whats-going-on">What’s Going On?</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#review-exercises-1">Review Exercises (#1)</a></li>
+</ul>
+</li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#instance-methods">Instance Methods</a><ul>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#modifying-attributes">Modifying Attributes</a></li>
+</ul>
+</li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#python-object-inheritance">Python Object Inheritance</a><ul>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#dog-park-example">Dog Park Example</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#extending-the-functionality-of-a-parent-class">Extending the Functionality of a Parent Class</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#parent-vs-child-classes">Parent vs. Child Classes</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#overriding-the-functionality-of-a-parent-class">Overriding the Functionality of a Parent Class</a></li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#review-exercises-2">Review Exercises (#2)</a></li>
+</ul>
+</li>
+<li><a href="https://realpython.com/python3-object-oriented-programming/#conclusion">Conclusion</a></li>
+</ul>
+</div>
+</div>
+<div class="sidebar-module sidebar-module-inset text-center my-3 py-0">
+<a target="_blank" rel="nofollow" href="https://twitter.com/intent/tweet/?text=Check%20out%20this%20%23Python%20tutorial:%20Object-Oriented%20Programming%20%28OOP%29%20in%20Python%203%20by%20@realpython&amp;url=https%3A//realpython.com/python3-object-oriented-programming/" class="mr-1 badge badge-twitter text-light"><i class="mr-1 fa fa-twitter text-light"></i>Tweet</a>
+<a target="_blank" rel="nofollow" href="https://facebook.com/sharer/sharer.php?u=https%3A//realpython.com/python3-object-oriented-programming/" class="mr-1 badge badge-facebook text-light"><i class="mr-1 fa fa-facebook text-light"></i>Share</a>
+<a target="_blank" rel="nofollow" href="mailto:?subject=Python%20article%20for%20you&amp;body=Check%20out%20this%20Python%20tutorial:%0A%0AObject-Oriented%20Programming%20%28OOP%29%20in%20Python%203%0A%0Ahttps%3A//realpython.com/python3-object-oriented-programming/" class="mr-1 badge badge-red text-light"><i class="mr-1 fa fa-envelope text-light"></i>Email</a>
+</div>
+<div class="sidebar-module sidebar-module-inset border card">
+<p><span class="badge badge-pill badge-success"><i class="fa fa-play-circle mr-1" aria-hidden="true"></i> Recommended Video Course</span><br><a class="stretched-link text-success" href="https://realpython.com/courses/intro-object-oriented-programming-oop-python/">Intro to Object-Oriented Programming (OOP) in Python</a></p>
+</div>
+<div class="sidebar-module sidebar-module-inset p-0" style="overflow:hidden;">
+<div style="display:block;position:relative;">
+<div style="display:block;width:100%;padding-top:25%;"></div>
+<div class="rpad" data-unit="4x1" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;"><a href="https://srv.realpython.net/click/43555883729/?c=10466391474&amp;p=58946116052&amp;r=14365" rel="nofollow" target="_blank"><img src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/1e343db533d77c15c03a534a86d34a0c" style="max-width: 100%; max-height: 100%; width: 100%;"></a></div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<div class="modal fade" id="modal-python-oop" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header bg-light pt-3 pb-2">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="progress" style="height: .5rem;">
+<div class="progress-bar progress-bar-striped progress-bar-animated w-50" role="progressbar"></div>
+</div>
+</div>
+<div class="col-12">
+<p class="text-muted text-center mb-0 mt-2">Almost there! Complete this form and click the button below to gain instant access:</p>
+</div>
+</div>
+</div>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">×</span>
+</button>
+</div>
+<div class="modal-body m-4">
+<div class="container-fluid">
+<div class="row align-items-center">
+<div class="col-12 col-lg-4">
+<img class="img-fluid rounded w-100 mb-4" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/python-oop-cheatsheet.webp">
+</div>
+<div class="col">
+<p class="text-center h3 mb-4">Object-Oriented Programming in Python: The 7 Best Resources (A Free PDF Cheat Sheet)</p>
+<form class="col-12" action="https://realpython.com/optins/process/" method="post">
+<input type="hidden" name="csrfmiddlewaretoken" value="ZAtp4pOfCqI03hx1X4qc3KGXNydF6sK8kj3zM4iKnWaXZ8b9u6bG1aovoojztamr">
+<input type="hidden" name="slug" value="python-oop">
+<div class="form-group">
+<input type="email" name="email" class="form-control" placeholder="Email Address" required="" autofocus="">
+</div>
+<button name="submit" type="submit" class="btn btn-primary btn-block text-wrap">Send My Free Cheat Sheet »</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="footer">
+<div class="container">
+<p class="text-center text-muted">© 2012–2019 Real Python ⋅ <a href="https://realpython.com/newsletter/">Newsletter</a> ⋅ <a href="https://www.youtube.com/realpython">YouTube</a> ⋅ <a href="https://twitter.com/realpython">Twitter</a> ⋅ <a href="https://facebook.com/LearnRealPython">Facebook</a> ⋅ <a href="https://www.instagram.com/realpython/">Instagram</a><br><a href="https://realpython.com/">Python Tutorials</a> ⋅ <a href="https://realpython.com/search">Search</a> ⋅ <a href="https://realpython.com/privacy-policy/">Privacy Policy</a> ⋅ <a href="https://realpython.com/sponsorships/">Advertise</a> ⋅ <a href="https://realpython.com/contact/">Contact</a><br>❤️ Happy Pythoning!</p>
+</div>
+</footer>
+<script>
+      (function(document, history, location) {
+        var HISTORY_SUPPORT = !!(history && history.pushState);
+
+        var anchorScrolls = {
+          ANCHOR_REGEX: /^#[^ ]+$/,
+          OFFSET_HEIGHT_PX: 120,
+
+          /**
+           * Establish events, and fix initial scroll position if a hash is provided.
+           */
+          init: function() {
+            this.scrollToCurrent();
+            window.addEventListener('hashchange', this.scrollToCurrent.bind(this));
+            document.body.addEventListener('click', this.delegateAnchors.bind(this));
+          },
+
+          /**
+           * Return the offset amount to deduct from the normal scroll position.
+           * Modify as appropriate to allow for dynamic calculations
+           */
+          getFixedOffset: function() {
+            return this.OFFSET_HEIGHT_PX;
+          },
+
+          /**
+           * If the provided href is an anchor which resolves to an element on the
+           * page, scroll to it.
+           * @param  {String} href
+           * @return {Boolean} - Was the href an anchor.
+           */
+          scrollIfAnchor: function(href, pushToHistory) {
+            var match, rect, anchorOffset;
+
+            if(!this.ANCHOR_REGEX.test(href)) {
+              return false;
+            }
+
+            match = document.getElementById(href.slice(1));
+
+            if(match) {
+              rect = match.getBoundingClientRect();
+              anchorOffset = window.pageYOffset + rect.top - this.getFixedOffset();
+              window.scrollTo(window.pageXOffset, anchorOffset);
+
+              // Add the state to history as-per normal anchor links
+              if(HISTORY_SUPPORT && pushToHistory) {
+                history.pushState({}, document.title, location.pathname + href);
+              }
+            }
+
+            return !!match;
+          },
+
+          /**
+           * Attempt to scroll to the current location's hash.
+           */
+          scrollToCurrent: function() {
+            this.scrollIfAnchor(window.location.hash);
+          },
+
+          /**
+           * If the click event's target was an anchor, fix the scroll position.
+           */
+          delegateAnchors: function(e) {
+            var elem = e.target;
+
+            if(
+              elem.nodeName === 'A' &&
+              this.scrollIfAnchor(elem.getAttribute('href'), true)
+            ) {
+              e.preventDefault();
+            }
+          }
+        };
+
+        window.addEventListener(
+          'DOMContentLoaded', anchorScrolls.init.bind(anchorScrolls)
+        );
+      })(window.document, window.history, window.location);
+    </script>
+<script src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/jquery.min.220afd743d9e.js"></script>
+<script src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/popper.min.e21a6649041e.js"></script>
+<script src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/bootstrap.min.e1d98d47689e.js"></script>
+<script src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/repl-toggle.0c6f07cf3eee.js"></script>
+<script>window.rp_prop_id = '58946116052';</script>
+<script src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/tag.js" async=""></script>
+<script src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/2153.js"></script>
+<script>
+  (function() {
+    function throttle(a, b) { var c, d; return function () { var e = this, f = arguments, g = +new Date; c && g < c + a ? (clearTimeout(d), d = setTimeout(function () { c = g, b.apply(e, f) }, a)) : (c = g, b.apply(e, f)) } }
+    var elems = document.getElementsByClassName("js-needs-scaling");
+    var resizeAll = function() {
+      Array.prototype.forEach.call(elems, function(elem) {
+        var frames = elem.getElementsByTagName("iframe")
+        if (frames.length === 0) {
+          return;
+        }
+        var disclosure = elem.getElementsByClassName("js-disclosure");
+        if (disclosure.length > 0) {
+          disclosure[0].style.display = "";
+        } else {
+          disclosure[0].style.display = "none";
+        }
+        if (frames[0].clientWidth <= elem.parentElement.clientWidth) {
+          elem.style.transform = "";
+          elem.classList.add("text-center");
+          return;
+        }
+        elem.classList.remove("text-center");
+        elem.style.transform = "scale(" + elem.clientWidth / frames[0].width + ")";
+      });
+    }
+    var periodicResize = function() {
+      resizeAll();
+      setTimeout(periodicResize, 100);
+    }
+    setTimeout(periodicResize, 100);
+  })();
+  </script>
+<script id="dsq-count-scr" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/count.js" async=""></script>
+<script>
+    var disqus_config = function () {
+      this.page.url = 'https://realpython.com/python3-object-oriented-programming/';
+      this.page.identifier = 'https://realpython.com/python3-object-oriented-programming/';
+      this.callbacks.onReady = [function() {
+        if (window.onDisqusReady) {
+          window.onDisqusReady();
+        }
+      }];
+    };
+    var disqus_script_url = 'https://realpython.disqus.com/embed.js';
+  </script>
+<script src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/lazydisqus.3a3e39583b32.js" defer=""></script>
+<script src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/OneSignalSDK.js" async=""></script>
+<script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+      OneSignal.init({
+        appId: "c0081e20-a523-42bb-b0ac-04c5a9e8bf40"
+      });
+    });
+  </script>
+<script src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/articlevc.11f8c3a3f08d.js" defer=""></script>
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Object-Oriented Programming (OOP) in Python 3",
+    
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://files.realpython.com/media/Object-Oriented-Programming-OOP-in-Python-3_Watermarked.0d29780806d5.jpg",
+      "width": 1920,
+      "height": 1080
+    },
+    
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://realpython.com/python3-object-oriented-programming/"
+    },
+    "datePublished": "2018-02-13T14:00:00+00:00",
+    "dateModified": "2019-03-16T19:20:57.541513+00:00",
+     "publisher": {
+      "@type": "Organization",
+      "name": "Real Python",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://realpython.com/static/real-python-logo-square-tiny.b2452b6d3823.png",
+        "width": 60,
+        "height": 60
+      }
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Real Python",
+      "url": "https://realpython.com",
+      "logo": "https://realpython.com/static/real-python-logo-square.28474fda9228.png"
+    },
+    "description": "In this article you’ll learn the fundamentals of object-oriented programming (OOP) in Python and how to work with classes, objects, and constructors. The tutorial also comes with several OOP exercises to review your learning progress."
+  }
+  </script>
+<script>
+  var _dcq = _dcq || [];
+  var _dcs = _dcs || {};
+  _dcs.account = '6214500';
+
+  (function() {
+    var dc = document.createElement('script');
+    dc.type = 'text/javascript'; dc.async = true;
+    dc.src = '//tag.getdrip.com/6214500.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(dc, s);
+  })();
+</script>
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2220911568135371');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2220911568135371&ev=PageView&noscript=1"
+/></noscript>
+
+
+<div class="drip-tab-container" hidden="">
+  <div id="drip-106703" class="drip-tab bottom right side-image image-left">
+    <div id="drip-header-106703" class="drip-header">
+      <a href="https://realpython.com/python3-object-oriented-programming/#" id="drip-toggle-106703" class="drip-toggle">
+        <h2 id="drip-teaser-106703">Improve Your Python</h2>
+        <span id="drip-tab-up-106703" class="drip-arrow up">
+          <svg width="12px" height="8px" viewBox="1362 659 12 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <polygon id="right_angle" stroke="none" fill="#FFFFFF" fill-rule="evenodd" transform="translate(1368.000000, 662.703125) rotate(-90.000000) translate(-1368.000000, -662.703125) " points="1364.29688 667.296875 1368.89062 662.703125 1364.29688 658.109375 1365.70312 656.703125 1371.70312 662.703125 1365.70312 668.703125"></polygon>
+          </svg>
+        </span>
+        <span id="drip-tab-down-106703" class="drip-arrow down" style="display: none"></span>
+      </a>
+    </div>
+    <div id="drip-content-106703" class="drip-content drip-clearfix" style="height: auto; bottom: -250px;">
+      <a id="drip-close-106703" class="drip-close">
+        <svg width="12px" height="12px" viewBox="630 19 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <polygon id="x" stroke="none" fill="#A8ACB9" fill-rule="evenodd" points="641.376687 30.1740899 636.49366 24.436669 641.095466 19 639.510399 19 635.701126 23.6038176 631.866288 19 630.281221 19 634.883028 24.436669 630 30.1740899 631.585067 30.1740899 635.701126 25.2463857 639.791621 30.1740899"></polygon>
+        </svg>
+      </a>
+
+      <div id="drip-form-panel-106703" class="drip-panel drip-clearfix" style="display: block;">
+        
+          <div class="drip-form-aside">
+            <span class="drip-image-helper"></span>
+            <img src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/side_ded3082af3893736e51b0d2da53701b6.png" class="drip-image">
+          </div>
+        
+
+        <div class="drip-form-main">
+          <h3 id="drip-content-header-106703">Improve Your Python</h3>
+          
+            <div id="drip-scroll-106703" class="drip-scroll">
+          
+            <div class="drip-description">...with a fresh 🐍&nbsp;<strong>Python&nbsp;Trick</strong>&nbsp;💌 &nbsp;<br>
+code snippet every couple of days:</div>
+            <form id="drip-form-106703">
+              <div style="display: none">
+                <input type="hidden" name="form_id" value="106703">
+              </div>
+              <dl class="no-labels">
+                
+                  
+                    <dt>Email Address</dt>
+                    <dd>
+                      
+                        <input type="email" name="fields[email]" value="" placeholder="Email Address" class="drip-text-field">
+                        <div id="drip-errors-for-email-106703" class="drip-errors"></div>
+                      
+                    </dd>
+                  
+                
+                  
+                    <dt></dt>
+                    <dd>
+                      
+                        <div class="zenput zenput--checkbox hidden" data-container="eu-checkbox">
+                          <input type="hidden" name="fields[eu_consent]" id="drip-field-eu_consent-denied" value="denied" disabled="disabled">
+                          <input type="checkbox" name="fields[eu_consent]" id="drip-field-eu_consent" value="granted" disabled="disabled">
+                          <label class="zenput__checkbox-label" for="drip-field-eu_consent">Receive the Real Python newsletter and get notified about new tutorials we publish on the site, as well as occasional special offers.
+                            <div class="zenput__checkbox-label__icon"><svg class="octicon octicon-check" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg></div>
+                          </label>
+                        </div>
+                      
+                    </dd>
+                  
+                
+                  
+                    <input type="hidden" name="fields[eu_consent_message]" value="Receive the Real Python newsletter and get notified about new tutorials we publish on the site, as well as occasional special offers.">
+                  
+                
+                
+                <div style="display: none;" aria-hidden="true">
+                  <dt for="website">Website</dt>
+                  <dd>
+                    <input type="text" id="website" name="website" placeholder="Website" class="drip-text-field" tabindex="-1" autocomplete="false" value="">
+                  </dd>
+                </div>
+              </dl>
+              <div class="form-controls">
+                <input type="submit" name="submit" value="Send Python Tricks »" id="drip-submit-106703" class="drip-submit-button">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="drip-success-panel-106703" class="drip-success drip-panel drip-clearfix" style="display: none">
+        <h3>Almost there...</h3>
+        <p class="drip-description drip-post-submission">Check your inbox. I'm sending you the first Python Trick right now.</p>
+      </div>
+
+      
+    </div>
+  </div>
+</div><div class="drip-lightbox-wrapper">
+  <div id="drip-108609" class="drip-lightbox drip-hidden side-image image-right">
+    <div id="drip-content-108609" class="drip-content" style="height: auto;">
+      <a id="drip-close-108609" class="drip-close">
+        <svg width="12px" height="12px" viewBox="630 19 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <polygon id="x" stroke="none" fill="#A8ACB9" fill-rule="evenodd" points="641.376687 30.1740899 636.49366 24.436669 641.095466 19 639.510399 19 635.701126 23.6038176 631.866288 19 630.281221 19 634.883028 24.436669 630 30.1740899 631.585067 30.1740899 635.701126 25.2463857 639.791621 30.1740899"></polygon>
+        </svg>
+      </a>
+
+      <div id="drip-form-panel-108609" class="drip-panel" style="display: block;">
+        
+          <div class="drip-form-aside">
+            <span class="drip-image-helper"></span>
+            <img src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/side_0743418fd26dda9240db39b8bc3744e1.png" class="drip-image">
+          </div>
+        
+
+        <div class="drip-form-main">
+          <h3 id="drip-content-header-108609">Get the Python Cheat Sheet</h3>
+          
+            <div id="drip-scroll-108609" class="drip-scroll">
+          
+            <div class="drip-description">Enter your email address below and we'll send you the Python cheat sheet right away:</div>
+
+            <form id="drip-form-108609">
+              <dl class="no-labels">
+                
+                  
+                    
+                      <dt>Email Address</dt>
+                    
+                    <dd>
+                      
+                        <input type="email" name="fields[email]" value="" placeholder="Email Address" class="drip-text-field">
+                        <div id="drip-errors-for-email-108609" class="drip-errors"></div>
+                      
+                    </dd>
+                  
+                
+                  
+                    
+                    <dd>
+                      
+                        <div class="zenput zenput--checkbox hidden" data-container="eu-checkbox">
+                          <input type="hidden" name="fields[eu_consent]" id="drip-field-eu_consent-denied" value="denied" disabled="disabled">
+                          <input type="checkbox" name="fields[eu_consent]" id="drip-field-eu_consent" value="granted" disabled="disabled">
+                          <label class="zenput__checkbox-label" for="drip-field-eu_consent">Receive the Real Python newsletter and get notified about new tutorials we publish on the site, as well as occasional special offers.
+                            <div class="zenput__checkbox-label__icon"><svg class="octicon octicon-check" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg></div>
+                          </label>
+                        </div>
+                      
+                    </dd>
+                  
+                
+                  
+                    <input type="hidden" name="fields[eu_consent_message]" value="Receive the Real Python newsletter and get notified about new tutorials we publish on the site, as well as occasional special offers.">
+                  
+                
+                
+                <div style="display: none;" aria-hidden="true">
+                  <dt for="website">Website</dt>
+                  <dd>
+                    <input type="text" id="website" name="website" placeholder="Website" class="drip-text-field" tabindex="-1" autocomplete="false" value="">
+                  </dd>
+                </div>
+              </dl>
+              <div class="form-controls">
+                <input type="submit" name="submit" value="Send My Python Cheat Sheet »" id="drip-submit-108609" class="drip-submit-button">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="drip-success-panel-108609" class="drip-success drip-panel" style="display: none">
+        <h3>Almost there...</h3>
+        <p class="drip-description drip-post-submission">We emailed you the cheat sheet. Please check your inbox in a few minutes.</p>
+      </div>
+
+      
+    </div>
+  </div>
+  <div id="drip-backdrop-108609" class="drip-backdrop drip-fade drip-hidden"></div>
+</div><div class="drip-lightbox-wrapper">
+  <div id="drip-108599" class="drip-lightbox drip-hidden side-image image-right">
+    <div id="drip-content-108599" class="drip-content" style="height: auto;">
+      <a id="drip-close-108599" class="drip-close">
+        <svg width="12px" height="12px" viewBox="630 19 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <polygon id="x" stroke="none" fill="#A8ACB9" fill-rule="evenodd" points="641.376687 30.1740899 636.49366 24.436669 641.095466 19 639.510399 19 635.701126 23.6038176 631.866288 19 630.281221 19 634.883028 24.436669 630 30.1740899 631.585067 30.1740899 635.701126 25.2463857 639.791621 30.1740899"></polygon>
+        </svg>
+      </a>
+
+      <div id="drip-form-panel-108599" class="drip-panel" style="display: block;">
+        
+          <div class="drip-form-aside">
+            <span class="drip-image-helper"></span>
+            <img src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/side_c058822f7c534cad01d5dea43398e2fd.png" class="drip-image">
+          </div>
+        
+
+        <div class="drip-form-main">
+          <h3 id="drip-content-header-108599">Get a Sample Chapter From the First Course</h3>
+          
+            <div id="drip-scroll-108599" class="drip-scroll">
+          
+            <div class="drip-description">Enter your email address below and we'll send you the sample chapter right away:</div>
+
+            <form id="drip-form-108599">
+              <dl class="no-labels">
+                
+                  
+                    
+                      <dt>Email Address</dt>
+                    
+                    <dd>
+                      
+                        <input type="email" name="fields[email]" value="" placeholder="Email Address" class="drip-text-field">
+                        <div id="drip-errors-for-email-108599" class="drip-errors"></div>
+                      
+                    </dd>
+                  
+                
+                  
+                    
+                    <dd>
+                      
+                        <div class="zenput zenput--checkbox hidden" data-container="eu-checkbox">
+                          <input type="hidden" name="fields[eu_consent]" id="drip-field-eu_consent-denied" value="denied" disabled="disabled">
+                          <input type="checkbox" name="fields[eu_consent]" id="drip-field-eu_consent" value="granted" disabled="disabled">
+                          <label class="zenput__checkbox-label" for="drip-field-eu_consent">Receive the Real Python newsletter and get notified about new tutorials we publish on the site, as well as occasional special offers.
+                            <div class="zenput__checkbox-label__icon"><svg class="octicon octicon-check" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg></div>
+                          </label>
+                        </div>
+                      
+                    </dd>
+                  
+                
+                  
+                    <input type="hidden" name="fields[eu_consent_message]" value="Receive the Real Python newsletter and get notified about new tutorials we publish on the site, as well as occasional special offers.">
+                  
+                
+                
+                <div style="display: none;" aria-hidden="true">
+                  <dt for="website">Website</dt>
+                  <dd>
+                    <input type="text" id="website" name="website" placeholder="Website" class="drip-text-field" tabindex="-1" autocomplete="false" value="">
+                  </dd>
+                </div>
+              </dl>
+              <div class="form-controls">
+                <input type="submit" name="submit" value="Get Sample Chapter »" id="drip-submit-108599" class="drip-submit-button">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="drip-success-panel-108599" class="drip-success drip-panel" style="display: none">
+        <h3>Almost there...</h3>
+        <p class="drip-description drip-post-submission">We emailed you the sample chapter. Please check your inbox in a few minutes.</p>
+      </div>
+
+      
+    </div>
+  </div>
+  <div id="drip-backdrop-108599" class="drip-backdrop drip-fade drip-hidden"></div>
+</div><iframe style="display: none;" src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/saved_resource(1).html"></iframe><iframe src="./Object-Oriented Programming (OOP) in Python 3 – Real Python_files/webPushAnalytics.html" style="display: none;"></iframe><div id="onesignal-bell-container" class="onesignal-bell-container onesignal-reset onesignal-bell-container-bottom-left"><div id="onesignal-bell-launcher" class="onesignal-bell-launcher onesignal-bell-launcher-md onesignal-bell-launcher-bottom-left onesignal-bell-launcher-theme-default onesignal-bell-launcher-active" style="bottom: 15px; left: 15px;"><div class="onesignal-bell-launcher-button"><svg class="onesignal-bell-svg" xmlns="http://www.w3.org/2000/svg" width="99.7" height="99.7" viewBox="0 0 99.7 99.7" style="filter: drop-shadow(0 2px 4px rgba(34,36,38,0.35));; -webkit-filter: drop-shadow(0 2px 4px rgba(34,36,38,0.35));;"><circle class="background" cx="49.9" cy="49.9" r="49.9" style="fill: rgb(208, 2, 27);"></circle><path class="foreground" d="M50.1 66.2H27.7s-2-.2-2-2.1c0-1.9 1.7-2 1.7-2s6.7-3.2 6.7-5.5S33 52.7 33 43.3s6-16.6 13.2-16.6c0 0 1-2.4 3.9-2.4 2.8 0 3.8 2.4 3.8 2.4 7.2 0 13.2 7.2 13.2 16.6s-1 11-1 13.3c0 2.3 6.7 5.5 6.7 5.5s1.7.1 1.7 2c0 1.8-2.1 2.1-2.1 2.1H50.1zm-7.2 2.3h14.5s-1 6.3-7.2 6.3-7.3-6.3-7.3-6.3z" style="fill: rgb(255, 255, 255);"></path><ellipse class="stroke" cx="49.9" cy="49.9" rx="37.4" ry="36.9" style="stroke: rgb(255, 255, 255);"></ellipse></svg></div><div class="onesignal-bell-launcher-badge" style="filter: drop-shadow(0 2px 4px rgba(34,36,38,0));; -webkit-filter: drop-shadow(0 2px 4px rgba(34,36,38,0));;"></div><div class="onesignal-bell-launcher-message"><div class="onesignal-bell-launcher-message-body"></div></div><div class="onesignal-bell-launcher-dialog" style="filter: drop-shadow(0px 2px 2px rgba(34,36,38,.15));; -webkit-filter: drop-shadow(0px 2px 2px rgba(34,36,38,.15));;"><div class="onesignal-bell-launcher-dialog-body"></div></div></div></div></body></html>
